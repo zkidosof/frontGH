@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>YOLOLane 메인 헤더</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+  <style>
+    body { margin: 0; font-family: 'Pretendard Variable','Noto Sans KR',sans-serif; background: transparent;}
+    .header-bar {
+      width: 100%;
+      height: 100px;
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+    }
+    .header-inner {
+      width: 1200px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      height: 100px;
+    }
+    .logo {
+      width: 180px;
+      height: 60px;
+      background: url('./img/main-logo-kor.png') center/contain no-repeat;
+      border-radius: 8px;
+      display: block;
+      margin-left: 0;
+    }
+    .header-buttons {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      height: 100px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      min-width: 90px;
+      padding: 8px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, border 0.18s, transform 0.13s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+      border: none;
+      background: #1062fe;
+      color: #fff;
+    }
+    .btn:hover { background: #004fce; }
+    .btn:active { background: #00337a; transform: scale(0.96); }
+  </style>
+</head>
+<body>
+  <div class="header-bar">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="#"><div class="logo"></div></a>
+      </div>
+      <div class="header-buttons">
+        <button class="btn" id="loginBtn">로그인/회원가입</button>
+      </div>
+    </div>
+  </div>
+  <script>
+  const btn = document.getElementById('loginBtn');
+
+  function updateButtonByLoginStatus() {
+    const data = JSON.parse(localStorage.getItem('memberInfo'));
+    if (data && data.nickname) {
+      btn.textContent = `${data.nickname}님`;
+      btn.dataset.state = 'loggedIn';
+    } else {
+      btn.textContent = '로그인/회원가입';
+      btn.dataset.state = 'loggedOut';
+    }
+  }
+
+  btn.addEventListener('click', function () {
+    const state = btn.dataset.state;
+
+    if (state === 'loggedOut') {
+      // 로그인 처리 (예시 데이터 저장)
+      const dummy = {
+        nickname: '짱돌',
+        name: '이짱돌',
+        phone: '010-5678-1234',
+        email: 'zzang@example.com',
+        birth: '1995-05-05',
+        gender: '남성(M)'
+      };
+      localStorage.setItem('memberInfo', JSON.stringify(dummy));
+      updateButtonByLoginStatus();
+    }
+
+    else if (state === 'loggedIn') {
+      // 회원정보 페이지 이동
+      location.href = '회원정보.html';
+      btn.dataset.state = 'confirmLogout';
+    }
+
+    else if (state === 'confirmLogout') {
+      const confirmed = confirm('로그아웃하시겠습니까?');
+      if (confirmed) {
+        localStorage.removeItem('memberInfo');
+        updateButtonByLoginStatus();
+      } else {
+        // 다시 회원정보 보기 상태로 유지
+        btn.dataset.state = 'loggedIn';
+      }
+    }
+  });
+
+  // 페이지 로드 시 상태 반영
+  window.addEventListener('DOMContentLoaded', updateButtonByLoginStatus);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+@charset "UTF-8";
+:root {
+  --defaultwhite: rgba(255, 255, 255, 1);
+  --primary-60: rgba(15, 98, 254, 1);
+  --coolgray-30: rgba(193, 199, 205, 1);
+  --button-s-font-family: "Roboto", Helvetica;
+  --button-s-font-weight: 500;
+  --button-s-font-size: 14px;
+  --button-s-letter-spacing: 0.5px;
+  --button-s-line-height: 100%;
+  --button-s-font-style: normal;
+}

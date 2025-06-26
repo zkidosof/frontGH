@@ -1,0 +1,963 @@
+@charset "UTF-8";
+.screen {
+  display: inline-flex;
+  flex-direction: column;
+  height: 480px;
+  align-items: flex-start;
+  gap: 16px;
+  position: relative;
+}
+
+.screen .title {
+  position: relative;
+  width: 344px;
+  height: 88.42px;
+}
+
+.screen .text-wrapper {
+  position: absolute;
+  width: 256px;
+  top: 0;
+  left: 0;
+  font-family: "Pyeojin Gothic-Bold", Helvetica;
+  font-weight: 700;
+  color: #333333;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: 29.1px;
+  white-space: nowrap;
+}
+
+.screen .list-button {
+  position: absolute;
+  width: 342px;
+  height: 36px;
+  top: 52px;
+  left: 0;
+}
+
+.screen .button {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  width: 62px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #0f62fe;
+  border-radius: 16px;
+  border: 2px solid;
+}
+
+.screen .text-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0px 16px;
+  position: relative;
+  flex: 0 0 auto;
+  margin-left: -10.50px;
+  margin-right: -10.50px;
+}
+
+.screen .button-text {
+  position: relative;
+  width: fit-content;
+  margin-top: -1.00px;
+  font-family: var(--button-s-font-family);
+  font-weight: var(--button-s-font-weight);
+  color: #ffffff;
+  font-size: var(--button-s-font-size);
+  letter-spacing: var(--button-s-letter-spacing);
+  line-height: var(--button-s-line-height);
+  white-space: nowrap;
+  font-style: var(--button-s-font-style);
+}
+
+.screen .div {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  width: 62px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+  left: 70px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 2px solid;
+  border-color: #b4b9c3;
+}
+
+.screen .button-text-2 {
+  position: relative;
+  width: fit-content;
+  margin-top: -1.00px;
+  font-family: var(--button-s-font-family);
+  font-weight: var(--button-s-font-weight);
+  color: #686161;
+  font-size: var(--button-s-font-size);
+  letter-spacing: var(--button-s-letter-spacing);
+  line-height: var(--button-s-line-height);
+  white-space: nowrap;
+  font-style: var(--button-s-font-style);
+}
+
+.screen .button-2 {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  width: 62px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+  left: 140px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 2px solid;
+  border-color: #b4b9c3;
+}
+
+.screen .button-3 {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  width: 62px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+  left: 210px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 2px solid;
+  border-color: #b4b9c3;
+}
+
+.screen .button-4 {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  width: 62px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+  left: 280px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 2px solid;
+  border-color: #b4b9c3;
+}
+
+.screen .button-text-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0px 16px;
+  position: relative;
+  flex: 0 0 auto;
+  margin-left: -24.00px;
+  margin-right: -24.00px;
+}
+
+.screen .hot-trip-list {
+  position: relative;
+  width: 1200px;
+  height: 363.47px;
+}
+
+.screen .view {
+  position: absolute;
+  width: 285px;
+  height: 363px;
+  top: 0;
+  left: 0;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: #d0c6c6;
+}
+
+.screen .group {
+  position: absolute;
+  width: 263px;
+  height: 132px;
+  top: 204px;
+  left: 9px;
+}
+
+.screen .button-5 {
+  display: flex;
+  width: 30px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 233px;
+  background-color: #c1c7cd;
+  border-radius: 50px;
+}
+
+.screen .icon-ionicons-sharp {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.screen .group-2 {
+  position: absolute;
+  width: 141px;
+  height: 132px;
+  top: 0;
+  left: 0;
+}
+
+.screen .group-3 {
+  position: absolute;
+  width: 116px;
+  height: 86px;
+  top: 0;
+  left: 0;
+}
+
+.screen .text-lodging-type {
+  width: 58px;
+  top: 0;
+  left: 0;
+  color: #5b5757;
+  font-size: 11px;
+  line-height: 13.3px;
+  position: absolute;
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.screen .text-lodging-name {
+  width: 28px;
+  top: 16px;
+  left: 0;
+  color: #000000;
+  font-size: 16px;
+  line-height: 19.4px;
+  position: absolute;
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.screen .text-lodging {
+  width: 100px;
+  top: 41px;
+  left: 0;
+  color: #5b5757;
+  font-size: 13px;
+  line-height: 15.8px;
+  position: absolute;
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.screen .bedge {
+  position: absolute;
+  width: 112px;
+  height: 24px;
+  top: 62px;
+  left: 0;
+}
+
+.screen .overlap-group-wrapper {
+  position: absolute;
+  width: 44px;
+  height: 24px;
+  top: 0;
+  left: 0;
+}
+
+.screen .overlap-group {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  background-color: #ffc83b;
+  border-radius: 6px;
+}
+
+.screen .icon-ionicons-filled {
+  position: absolute;
+  width: 12px;
+  height: 13px;
+  top: 5px;
+  left: 2px;
+}
+
+.screen .text-wrapper-2 {
+  position: absolute;
+  width: 19px;
+  height: 17px;
+  top: 4px;
+  left: 18px;
+  font-family: "Pyeojin Gothic-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: 15.8px;
+  white-space: nowrap;
+}
+
+.screen .text-lodging-2 {
+  width: 61px;
+  top: 3px;
+  left: 49px;
+  color: #5b5757;
+  font-size: 13px;
+  line-height: 15.8px;
+  position: absolute;
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.screen .overlap {
+  position: absolute;
+  width: 139px;
+  height: 40px;
+  top: 92px;
+  left: 0;
+}
+
+.screen .text-cupon {
+  position: absolute;
+  width: 60px;
+  top: 0;
+  left: 0;
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  color: #5b5757;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: 15.8px;
+  white-space: nowrap;
+}
+
+.screen .text-price {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 6px;
+  position: absolute;
+  top: 16px;
+  left: 0;
+}
+
+.screen .text-lodging-3 {
+  position: relative;
+  width: 58px;
+  height: 23.52px;
+  margin-top: -1.00px;
+  font-family: "Pyeojin Gothic-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 18px;
+  line-height: 21.8px;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.screen .text-lodging-4 {
+  position: relative;
+  width: 13px;
+  height: 19.24px;
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  color: #000000;
+  font-size: 15px;
+  line-height: 18.2px;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.screen .text-lodging-5 {
+  position: relative;
+  width: 56px;
+  height: 18.17px;
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  color: #5b5656;
+  font-size: 14px;
+  line-height: 17.0px;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.screen .img {
+  position: absolute;
+  width: 284px;
+  height: 182px;
+  top: -1px;
+  left: -1px;
+  border-radius: 20px;
+  background-image: url(./img/img-3.png);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.screen .view-2 {
+  left: 305px;
+  position: absolute;
+  width: 285px;
+  height: 363px;
+  top: 0;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: #d0c6c6;
+}
+
+.screen .group-4 {
+  position: absolute;
+  width: 263px;
+  height: 133px;
+  top: 204px;
+  left: 9px;
+}
+
+.screen .group-5 {
+  position: absolute;
+  width: 132px;
+  height: 133px;
+  top: 0;
+  left: 0;
+}
+
+.screen .text-cupon-2 {
+  position: absolute;
+  width: 60px;
+  top: 92px;
+  left: 0;
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  color: #5b5757;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: 15.8px;
+  white-space: nowrap;
+}
+
+.screen .text-price-2 {
+  position: absolute;
+  width: 136px;
+  height: 24px;
+  top: 109px;
+  left: 0;
+}
+
+.screen .overlap-2 {
+  position: absolute;
+  width: 68px;
+  height: 24px;
+  top: 0;
+  left: 0;
+}
+
+.screen .text-lodging-6 {
+  position: absolute;
+  width: 58px;
+  top: 0;
+  left: 0;
+  font-family: "Pyeojin Gothic-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 18px;
+  line-height: 21.8px;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.screen .text-lodging-7 {
+  position: absolute;
+  width: 13px;
+  top: 4px;
+  left: 55px;
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  color: #000000;
+  font-size: 15px;
+  line-height: 18.2px;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.screen .text-lodging-8 {
+  position: absolute;
+  width: 56px;
+  top: 5px;
+  left: 74px;
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  color: #5b5656;
+  font-size: 14px;
+  line-height: 17.0px;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.screen .img-2 {
+  position: absolute;
+  width: 284px;
+  height: 182px;
+  top: -1px;
+  left: -1px;
+  border-radius: 20px;
+  background-image: url(./img/image.png);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.screen .view-3 {
+  left: 610px;
+  position: absolute;
+  width: 285px;
+  height: 363px;
+  top: 0;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: #d0c6c6;
+}
+
+.screen .text-wrapper-3 {
+  position: absolute;
+  width: 19px;
+  height: 17px;
+  top: 4px;
+  left: 18px;
+  font-family: "Roboto-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: 15.8px;
+  white-space: nowrap;
+}
+
+.screen .img-3 {
+  position: absolute;
+  width: 284px;
+  height: 182px;
+  top: -1px;
+  left: -1px;
+  border-radius: 20px;
+  background-image: url(./img/img-2.png);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.screen .view-4 {
+  left: 915px;
+  position: absolute;
+  width: 285px;
+  height: 363px;
+  top: 0;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: #d0c6c6;
+}
+
+.screen .img-4 {
+  position: absolute;
+  width: 284px;
+  height: 182px;
+  top: -1px;
+  left: -1px;
+  border-radius: 20px;
+  background-image: url(./img/img.png);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+/* Original CSS code */
+
+.screen {
+  display: inline-flex;
+  flex-direction: column;
+  height: 480px;
+  align-items: flex-start;
+  gap: 16px;
+  position: relative;
+}
+
+.screen .title {
+  position: relative;
+  width: 344px;
+  height: 88.42px;
+}
+
+.screen .text-wrapper {
+  position: absolute;
+  width: 256px;
+  top: 0;
+  left: 0;
+  font-family: "Pyeojin Gothic-Bold", Helvetica;
+  font-weight: 700;
+  color: #333333;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: 29.1px;
+  white-space: nowrap;
+}
+
+.screen .list-button {
+  position: absolute;
+  width: 342px;
+  height: 36px;
+  top: 52px;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.screen .button {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  width: 62px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 2px solid #b4b9c3;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.screen .button.active,
+.screen .button:hover {
+  background-color: #0f62fe;
+  border-color: #0f62fe;
+}
+
+.screen .button-text {
+  font-family: var(--button-s-font-family);
+  font-weight: var(--button-s-font-weight);
+  color: #686161;
+  font-size: var(--button-s-font-size);
+  letter-spacing: var(--button-s-letter-spacing);
+  line-height: var(--button-s-line-height);
+  white-space: nowrap;
+  font-style: var(--button-s-font-style);
+  transition: color 0.3s ease;
+}
+
+.screen .button.active .button-text,
+.screen .button:hover .button-text {
+  color: #ffffff;
+}
+
+.screen .hot-trip-list {
+  position: relative;
+  width: 1200px;
+  height: 363.47px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.screen .view {
+  width: 285px;
+  height: 363px;
+  border-radius: 20px;
+  border: 1px solid #d0c6c6;
+  overflow: hidden;
+  position: relative;
+}
+
+.screen .group {
+  position: absolute;
+  width: 263px;
+  height: 132px;
+  top: 204px;
+  left: 9px;
+}
+
+.screen .button-5 {
+  display: flex;
+  width: 30px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #c1c7cd;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.screen .button-5:hover {
+  background-color: #a8b0b9;
+}
+
+.screen .icon-ionicons-sharp {
+  width: 24px;
+  height: 24px;
+}
+
+.screen .group-2,
+.screen .group-5 {
+  position: absolute;
+  width: 141px;
+  height: 132px;
+  top: 0;
+  left: 0;
+}
+
+.screen .group-3 {
+  position: absolute;
+  width: 116px;
+  height: 86px;
+  top: 0;
+  left: 0;
+}
+
+.screen .text-lodging-type {
+  width: 58px;
+  top: 0;
+  left: 0;
+  color: #5b5757;
+  font-size: 11px;
+  line-height: 13.3px;
+  position: absolute;
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.screen .text-lodging-name {
+  width: 28px;
+  top: 16px;
+  left: 0;
+  color: #000000;
+  font-size: 16px;
+  line-height: 19.4px;
+  position: absolute;
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.screen .text-lodging {
+  width: 100px;
+  top: 41px;
+  left: 0;
+  color: #5b5757;
+  font-size: 13px;
+  line-height: 15.8px;
+  position: absolute;
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.screen .bedge {
+  position: absolute;
+  width: 112px;
+  height: 24px;
+  top: 62px;
+  left: 0;
+  display: flex;
+  align-items: center;
+}
+
+.screen .rating {
+  display: flex;
+  align-items: center;
+  background-color: #ffc83b;
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+.screen .icon-ionicons-filled {
+  width: 12px;
+  height: 13px;
+  margin-right: 4px;
+}
+
+.screen .rating-score {
+  font-family: "Pyeojin Gothic-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: 15.8px;
+}
+
+.screen .text-lodging-2 {
+  margin-left: 5px;
+  color: #5b5757;
+  font-size: 13px;
+  line-height: 15.8px;
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.screen .price-info {
+  position: absolute;
+  width: 139px;
+  height: 40px;
+  top: 92px;
+  left: 0;
+}
+
+.screen .text-cupon,
+.screen .text-cupon-2 {
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  color: #5b5757;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: 15.8px;
+  white-space: nowrap;
+}
+
+.screen .text-price,
+.screen .text-price-2 {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.screen .current-price {
+  font-family: "Pyeojin Gothic-Regular", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 18px;
+  line-height: 21.8px;
+  letter-spacing: 0;
+}
+
+.screen .currency {
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  color: #000000;
+  font-size: 15px;
+  line-height: 18.2px;
+  letter-spacing: 0;
+}
+
+.screen .original-price {
+  font-family: "Pyeojin Gothic-Light", Helvetica;
+  font-weight: 300;
+  color: #5b5656;
+  font-size: 14px;
+  line-height: 17.0px;
+  letter-spacing: 0;
+  text-decoration: line-through;
+}
+
+.screen .img,
+.screen .img-2,
+.screen .img-3,
+.screen .img-4 {
+  position: absolute;
+  width: 100%;
+  height: 182px;
+  top: 0;
+  left: 0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.screen .img {
+  background-image: url(./img/img-3.png);
+}
+
+.screen .img-2 {
+  background-image: url(./img/image.png);
+}
+
+.screen .img-3 {
+  background-image: url(./img/img-2.png);
+}
+
+.screen .img-4 {
+  background-image: url(./img/img.png);
+}
+
+@media (max-width: 1200px) {
+  .screen .hot-trip-list {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .screen .view {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .screen {
+    height: auto;
+  }
+
+  .screen .title {
+    width: 100%;
+    height: auto;
+    text-align: center;
+  }
+
+  .screen .text-wrapper {
+    position: static;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .screen .list-button {
+    position: static;
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .screen .button {
+    margin-bottom: 10px;
+  }
+
+  .screen .view {
+    width: 100%;
+    max-width: 285px;
+  }
+}

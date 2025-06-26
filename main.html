@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>YOLOLANE | 게스트하우스, 여행지 숙소 예약 대표 플렛폼</title>
+<style>
+		.main-content {
+			display: flex;
+			flex-direction: column;
+			/* background-color: rgba(255, 255, 255, 1); */
+		}
+
+		#main-header {
+			position: relative;
+			width: 100%;
+			height: 100px;
+			/* background-color: aqua; */
+		}
+
+		.header-top {
+			display: flex;
+			width: 1200px;
+			height: 100px;
+			align-items: center;
+			margin: auto;
+			justify-content: space-between;
+		}
+
+		.logo-img {
+			position: relative;
+			width: 180px;
+			height: 60px;
+			background-image: url("./img/main-logo-kor.png");
+			background-size: cover;
+			background-position: 50% 50%;
+		}
+
+		.user-button {
+			display: flex;
+			width: 285px;
+			align-items: center;
+			gap: 90px;
+			position: relative;
+		}
+
+		.login-btn {
+			display: inline-flex;
+			height: 48px;
+			align-items: center;
+			justify-content: center;
+			padding: 8px 12px;
+			position: relative;
+			border-radius: 12px;
+			border: 2px solid #DDE1E6;
+		}
+
+		.menu-toggle {
+			width: 40px;
+			height: 50px;
+			background-color: transparent;
+		}
+
+		.btn-text {
+			width: fit-content;
+			color: #333333;
+		}
+
+		/* Top Search Section */
+		.home-search-seciton {
+			position: relative;
+			width: 100%;
+			height: 464px;
+			overflow: hidden;
+		}
+
+		.home-search-seciton>img {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			z-index: -1;
+		}
+
+		.section-item-wrap {
+			position: relative;
+			width: 100%;
+			max-width: 1200px;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			z-index: 1;
+			color: #fff;
+			margin-left: auto;
+			margin-right: auto;
+			padding-top: 113px;
+		}
+
+		/* 추가적으로 .banenr-text, .search-box 등 .section-item 내부 요소들의 스타일을 조정할 수 있습니다. */
+		.banenr-text {
+			font-size: 2rem;
+			line-height: 2.75rem;
+			letter-spacing: 0px;
+			font-weight: 700;
+			color: rgb(255, 255, 255);
+			margin-bottom: 32px;
+		}
+
+		.search-box {
+			width: 100%;
+			background-color: #ffffff;
+			box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.08);
+			border-radius: 16px;
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			z-index: 11;
+			padding-left: 20px;
+			padding-right: 20px;
+			padding-bottom: 24px;
+		}
+
+		.search-tab {
+			position: relative;
+			width: 100%;
+			height: 68px;
+			display: flex;
+			flex-direction: row;
+			border-bottom-width: 1px;
+			border-color: rgb(245, 245, 245);
+		}
+
+		.search-tab>ul {
+			height: 100%;
+			display: flex;
+			flex-direction: row;
+			gap: 24px;
+			position: relative;
+			z-index: 2;
+			overflow: hidden;
+		}
+
+		.search-tab>ul>li {
+			padding-left: 16px;
+			padding-right: 16px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			outline: transparent solid 2px;
+			outline-offset: 2px;
+		}
+
+		/* 탭 아이템 공통 스타일 */
+		.tab-item,
+		.tab-item2 {
+			font-size: 1rem;
+			line-height: normal;
+		}
+
+		/* 선택된 탭 아이템 */
+		.tab-item {
+			font-weight: 700;
+			color: rgb(29, 139, 255);
+			border-bottom: 2px solid rgb(29, 139, 255);
+		}
+
+		/* 선택되지 않은 탭 아이템 */
+		.tab-item2 {
+			font-weight: 500;
+			color: rgb(112, 112, 112);
+		}
+
+		/* 검색 창*/
+		.search-area {
+			width: 100%;
+		}
+
+		.search-form {
+			max-width: 100%;
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			gap: 12px;
+			height: 48px;
+		}
+
+		.search-label {
+			max-width: 420px;
+			min-width: 280px;
+			height: 48px;
+			flex-basis: 40%;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+		}
+
+		/* search-wrap, date-choice-btn, people-count-btn 공통 스타일 */
+		.search-wrap,
+		.date-choice-btn,
+		.people-count-btn {
+			width: 100%;
+			height: 48px;
+			display: flex;
+			align-items: center;
+			border-radius: 8px;
+			background-color: rgb(245, 245, 245);
+		}
+
+		.search-wrap {
+			overflow: hidden;
+			padding: 4px 14px;
+		}
+
+		.icon-box {
+			height: 20px;
+			width: 20px;
+			margin-right: 8px;
+			display: block;
+		}
+
+		.search-input {
+			height: 20px;
+			width: 100%;
+			position: relative;
+		}
+
+		.search-input-area {
+			all: unset;
+			/* input의 기본 스타일 제거 */
+			cursor: pointer;
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			background-color: rgba(255, 255, 255, 0);
+			font-size: 1rem;
+			line-height: normal;
+			letter-spacing: 0px;
+			font-weight: 600;
+			color: rgb(51, 51, 51);
+			caret-color: rgb(29, 139, 255);
+		}
+
+		/* 날짜 선택 */
+		.date-choice-wrap {
+			max-width: 298px;
+			flex-basis: 35%;
+			cursor: pointer;
+		}
+
+		.date-choice-btn {
+			padding: 12px 20px 12px 14px;
+		}
+
+		.choose-date-text {
+			color: rgb(51, 51, 51);
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			font-weight: 600;
+			margin-left: 8px;
+			text-align: left;
+			overflow: hidden;
+			height: 100%;
+			font-size: 1rem;
+			line-height: 1.5rem;
+			letter-spacing: 0px;
+		}
+
+		/* 인원수 선택 */
+		.people-count-wrap {
+			max-width: 298px;
+			flex-basis: 35%;
+		}
+
+		.people-count-btn {
+			gap: 8px;
+			/* 내부 요소 간 gap */
+			padding: 4px 4px 4px 16px;
+		}
+
+		.count-text {
+			font-weight: 600;
+			color: rgb(51, 51, 51);
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			font-size: 1rem;
+			line-height: normal;
+			letter-spacing: 0px;
+		}
+
+		.search-btn-wrap {
+			min-width: 120px;
+		}
+
+		.search-btn {
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			display: flex;
+			width: 100%;
+			background-color: rgb(29, 139, 255);
+			color: #fff;
+			border-style: none;
+			padding: 10px 18px;
+			height: 48px;
+			border-radius: 10px;
+			border-width: 2px;
+			font-size: 1rem;
+			line-height: normal;
+			letter-spacing: 0px;
+			font-weight: 600;
+		}
+
+		/* 이벤트 안내 */
+		.event-section,
+		.popular-section {
+			max-width: 1200px;
+			margin-left: auto;
+			margin-right: auto;
+			width: 100%;
+			margin-top: 20px;
+		}
+
+		.text-box-wrap {
+			padding-top: 16px;
+			padding-bottom: 16px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.section-title {
+			font-size: 1.125rem;
+			line-height: normal;
+			letter-spacing: 0px;
+			font-weight: 700;
+			color: rgb(51, 51, 51);
+		}
+
+		.more-btn {
+			display: flex;
+			align-items: center;
+			white-space: nowrap;
+			cursor: pointer;
+			font-weight: 600;
+			font-size: 0.875rem;
+			line-height: normal;
+			letter-spacing: 0px;
+			color: rgb(29, 139, 255);
+		}
+
+		.event-item-wrap {
+			max-width: 1200px;
+			display: flex;
+			justify-content: space-between;
+			gap: 24px;
+			margin: 0 auto;
+		}
+
+		.event-item-list {
+			flex: 1;
+			height: 152px;
+			border-radius: 12px;
+			align-items: center;
+			overflow: hidden;
+			cursor: pointer;
+		}
+
+		.event-item-list img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+
+		.popular-item-wrap {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			display: flex;
+			box-sizing: border-box;
+			transition-property: transform;
+		}
+
+		.popular-item {
+			margin-right: 24px;
+			display: flex;
+			flex-direction: column;
+			cursor: pointer;
+		}
+
+		.popular-item>a {
+			height: 100%;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.popular-thumbnail {
+			width: 180px;
+			height: 180px;
+			aspect-ratio: 1/1;
+			border-radius: 12px;
+			overflow: hidden;
+		}
+
+		.popular-thumbnail img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+			transition: transform 0.3s ease;
+		}
+
+		.popular-thumbnail:hover img {
+			transform: scale(1.05);
+		}
+
+		.city-name-text {
+			font-size: 0.875rem;
+			line-height: normal;
+			letter-spacing: 0px;
+			font-weight: 500;
+			color: rgb(51, 51, 51);
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			padding: 12px 4px 20px;
+
+		}
+
+		/* .popular-thumbnail {
+			border: 2px solid red;
+		} */
+
+		/* .popular-item {
+			border: 2px dashed blue;
+		}
+
+		.popular-item img {
+			border: 1px solid green;
+		} */
+
+		.event-banner {
+			width: 1200px;
+			margin-top: 40px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.banner-wrap {
+			position: relative;
+			cursor: pointer;
+			width: 100%;
+			height: 168px;
+			display: flex;
+			overflow: hidden;
+			border-radius: 16px;
+		}
+
+		.banner-wrap img {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		/* 지역별 인기 투어 */
+		.region-tour {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 20px 0;
+		}
+
+		.region-tours-wrap {
+			display: flex;
+			width: 1200px;
+			height: 448px;
+			border: 1px solid rgba(0, 0, 0, 0.16);
+			border-radius: 16px;
+			overflow: hidden;
+			box-sizing: border-box;
+		}
+
+		/* 왼쪽 */
+		.tours-box-left {
+			position: relative;
+			width: 386px;
+			height: 100%;
+			flex-shrink: 0;
+			overflow: hidden;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.bg-color-opacity {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			background-color: rgba(0, 0, 0, 0.3);
+			z-index: 1;
+		}
+
+		.tours-left-img {
+			width: 100%;
+			height: 100%;
+			aspect-ratio: 1/1;
+			overflow: hidden;
+		}
+
+		.tours-left-img img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-top-left-radius: 16px;
+			border-bottom-left-radius: 16px;
+			display: block;
+			overflow: hidden;
+			/* background-color: rgb(242 243 247/var(--tw-bg-opacity, 1)); */
+		}
+
+		.tours-contents-wrap {
+			width: 352px;
+			height: 352px;
+			display: flex;
+			padding: 8px;
+			flex-direction: column;
+			justify-content: space-between;
+			color: white;
+			z-index: 1;
+		}
+
+		.tours-title {
+			font-size: 2.2rem;
+			line-height: 2.8rem;
+			line-break: anywhere;
+			overflow: hidden;
+			font-weight: 700;
+			margin-bottom: 12px;
+		}
+
+		.more-btn {
+			background: rgba(255, 255, 255, 0.9);
+			border-radius: 20px;
+			padding: 6px 12px;
+			border: none;
+			cursor: pointer;
+		}
+
+		.more-btn a {
+			display: flex;
+			align-items: center;
+			gap: 4px;
+			color: #1D8BFF;
+			font-weight: 600;
+			text-decoration: none;
+		}
+
+		.more-btn img {
+			width: 12px;
+			height: 12px;
+		}
+
+		/* 오른쪽 */
+		.tours-box-right {
+			flex: 1;
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			padding: 24px;
+			box-sizing: border-box;
+			background: #fff;
+			border-top-right-radius: 16px;
+			border-bottom-right-radius: 16px;
+		}
+
+		.tour-list-item {
+			width: 240px;
+			display: flex;
+			flex-direction: column;
+			background: #f9f9f9;
+			border-radius: 12px;
+			overflow: hidden;
+			cursor: pointer;
+			text-decoration: none;
+		}
+
+		.tour-item {
+			width: 100%;
+			height: 320px;
+			overflow: hidden;
+		}
+
+		.tour-item img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+			border-radius: 16px;
+		}
+
+		.tour-item-text {
+			padding: 12px;
+		}
+
+		.tour-item-title {
+			font-size: 1rem;
+			font-weight: 600;
+			color: #333;
+			margin-bottom: 8px;
+		}
+
+		.tour-item-price {
+			font-size: 1.125rem;
+			font-weight: 700;
+			color: #222;
+		}
+
+		.tour-item-sub {
+			font-size: 0.875rem;
+			color: #666;
+			margin-left: 2px;
+		}
+	</style>
+<link href="./css/global.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<div id="wrap">
+<!-- <header id="main-header">
+			<div class="header-top">
+				<div class="logo">
+					<a href="#">
+						<div class="logo-img"></div>
+					</a>
+				</div>
+				<div class="user-button" aria-label="로그아웃 상황">
+					<div role="button" class="login-btn" data-modal-target="#login-modal">
+						<span class="btn-text">로그인/회원가입</span>
+					</div>
+					<button type="button" class="menu-toggle" aria-label="메뉴 열기">
+						<img src="./img/hamburger.png" alt="메뉴 아이콘">
+					</button>
+				</div>
+				<div class="header-login" style="display: none;">
+					<div role="button" class="user-profile">
+						<img src="#" alt="user-profile-img">
+						<span class="user-nickname"></span>
+						<span class="grade"></span>
+						<button type="button" class="btn-hamburger-menu">
+							<span class="line"></span>
+							<span class="line"></span>
+							<span class="line"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+			<nav class="side-nav" style="display: none;">
+				<div class="nav-logout">
+					<div role="button" class="nav-login-btn" data-modal-target="#login-modal">
+						<span>로그인/회원가입</span>
+					</div>
+					<span>모든 여행</span>
+					<ul class="nav-list">
+						<li><a href="#">국내숙소</a></li>
+						<li><a href="#">해외숙소</a></li>
+						<li><a href="#">레저/티켓</a></li>
+						<li><a href="#">렌터카</a></li>
+						<li><a href="#">고객센터</a></li>
+					</ul>
+				</div>
+
+				<div class="nav-login" style="display: none;">
+					<div role="button" class="nav-user-profile">
+						<img src="#" alt="user-profile-img">
+						<span class="user-nickname"></span>
+						<span class="grade"></span>
+					</div>
+					<ul class="nav-list">
+						<li class="login-required"><a href="#">마이페이지</a></li>
+						<li class="login-required"><a href="#">내 예약</a></li>
+						<li><a href="#">국내숙소</a></li>
+						<li><a href="#">해외숙소</a></li>
+						<li><a href="#">레저/티켓</a></li>
+						<li><a href="#">렌터카</a></li>
+						<li class="login-required"><a href="#">이벤트</a></li>
+						<li class="login-required"><a href="#">고객센터</a></li>
+						<li class="login-required"><a href="#">설정</a></li>
+						<li class="login-required"><a href="#">로그아웃</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header> -->
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<title>YOLOLane 메인 헤더</title>
+<link href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" rel="stylesheet"/>
+<style>
+    body { margin: 0; font-family: 'Pretendard Variable','Noto Sans KR',sans-serif; background: transparent;}
+    .header-bar {
+      width: 100%;
+      height: 100px;
+      background: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+    }
+    .header-inner {
+      width: 1200px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      height: 100px;
+    }
+    .logo {
+      width: 180px;
+      height: 60px;
+      background: url('./img/main-logo-kor.png') center/contain no-repeat;
+      border-radius: 8px;
+      display: block;
+      margin-left: 0;
+    }
+    .header-buttons {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      height: 100px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      min-width: 90px;
+      padding: 8px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, border 0.18s, transform 0.13s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+      border: none;
+      background: #1062fe;
+      color: #fff;
+    }
+    .btn:hover { background: #004fce; }
+    .btn:active { background: #00337a; transform: scale(0.96); }
+  </style>
+</head>
+<body>
+<div class="header-bar">
+<div class="header-inner">
+<div class="header-left">
+<a href="#"><div class="logo"></div></a>
+</div>
+<div class="header-buttons">
+<button class="btn" id="loginBtn">로그인/회원가입</button>
+</div>
+</div>
+</div>
+<script>
+  const btn = document.getElementById('loginBtn');
+
+  function updateButtonByLoginStatus() {
+    const data = JSON.parse(localStorage.getItem('memberInfo'));
+    if (data && data.nickname) {
+      btn.textContent = `${data.nickname}님`;
+      btn.dataset.state = 'loggedIn';
+    } else {
+      btn.textContent = '로그인/회원가입';
+      btn.dataset.state = 'loggedOut';
+    }
+  }
+
+  btn.addEventListener('click', function () {
+    const state = btn.dataset.state;
+
+    if (state === 'loggedOut') {
+      // 로그인 처리 (예시 데이터 저장)
+      const dummy = {
+        nickname: '앙둥',
+        name: '양동길',
+        phone: '010-5678-1234',
+        email: 'zzang@example.com',
+        birth: '1995-05-05',
+        gender: '남성(M)'
+      };
+      localStorage.setItem('memberInfo', JSON.stringify(dummy));
+      updateButtonByLoginStatus();
+    }
+
+    else if (state === 'loggedIn') {
+      // 회원정보 페이지 이동
+      location.href = '회원정보.html';
+      btn.dataset.state = 'confirmLogout';
+    }
+
+    else if (state === 'confirmLogout') {
+      const confirmed = confirm('로그아웃하시겠습니까?');
+      if (confirmed) {
+        localStorage.removeItem('memberInfo');
+        updateButtonByLoginStatus();
+      } else {
+        // 다시 회원정보 보기 상태로 유지
+        btn.dataset.state = 'loggedIn';
+      }
+    }
+  });
+
+  // 페이지 로드 시 상태 반영
+  window.addEventListener('DOMContentLoaded', updateButtonByLoginStatus);
+</script>
+</body>
+</html>
+ <!--헤더 끌구옴  -->
+<main class="main-content">
+<!-- 메인 배너, 검색 -->
+<section aria-label="top-main-visual" class="home-search-seciton" role="region">
+<div class="section-item-wrap">
+<h1 class="banenr-text">언제든 떠나는 여행 욜로레인과 함께</h1>
+<div class="search-box">
+<div class="search-tab">
+<ul aria-label="카테고리" class="tablist" role="tablist">
+<li><span class="tab-item">국내 숙소</span></li>
+<li><span class="tab-item2">해외 숙소</span></li>
+</ul>
+</div>
+<div class="search-area">
+<form class="search-form" role="search">
+<label class="search-label" role="presentation">
+<div class="search-wrap">
+<div class="icon-box">
+<img alt="search" src="./img/search.png"/>
+</div>
+<div class="search-input">
+<input class="search-input-area" name="search_term" placeholder="여행지나 숙소를 검색해보세요" type="text"/>
+</div>
+</div>
+</label>
+<div class="date-choice-wrap" role="button">
+<button class="date-choice-btn" type="button">
+<div class="icon-box">
+<img alt="calander" src="./img/calander.png"/>
+</div>
+<span class="choose-date-text">날짜를 선택하세요.</span>
+</button>
+</div>
+<div class="people-count-wrap" role="button">
+<button class="people-count-btn" type="button">
+<div class="icon-box">
+<img alt="people" src="./img/people.png"/>
+</div>
+<span class="count-text">인원 수 선택하세요.</span>
+</button>
+</div>
+<div class="search-btn-wrap">
+<button aria-label="검색 버튼" class="search-btn">
+<span>검색</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<img alt="상단 메인 이미지" src="./img/visual2.webp"/>
+</section>
+<!-- 이벤트 안내 -->
+<section aria-label="놀라운 이벤트" class="event-section" role="region">
+<div class="text-box-wrap">
+<h2 class="section-title">놀라운 이벤트</h2>
+<a class="more-btn" href="#"><span>더보기</span></a>
+</div>
+<div class="event-item-wrap">
+<article class="event-item-list">
+<a href="#"><img alt="Event-item-01" src="./img/event-item01.jpg"/></a>
+</article>
+<article class="event-item-list">
+<a href="#"><img alt="Event-item-02" src="./img/event-item02.jpg"/></a>
+</article>
+<article class="event-item-list">
+<a href="#"><img alt="Event-item-03" src="./img/event-item03.jpg"/></a>
+</article>
+</div>
+</section>
+<!-- 국내 인기 여행지 -->
+<section aria-label="국내 인기 여행지" class="popular-section" role="region">
+<div class="popular-content">
+<div class="text-box-wrap">
+<h2 class="section-title">국내 인기 여행지</h2>
+</div>
+<div class="popular-item-wrap">
+<article class="popular-item" role="presentation">
+<a href="#">
+<div class="popular-thumbnail">
+<img alt="서울" src="./img/city-list-seoul.jpg"/>
+</div>
+<span class="city-name-text">서울</span>
+</a>
+</article>
+<article class="popular-item" role="presentation">
+<a href="#">
+<div class="popular-thumbnail">
+<img alt="대전" src="./img/city-list-dj.jpg"/>
+</div>
+<span class="city-name-text">대전</span>
+</a>
+</article>
+<article class="popular-item" role="presentation">
+<a href="#">
+<div class="popular-thumbnail">
+<img alt="대구" src="./img/city-list-dg.png"/>
+</div>
+<span class="city-name-text">대구</span>
+</a>
+</article>
+<article class="popular-item" role="presentation">
+<a href="#">
+<div class="popular-thumbnail">
+<img alt="부산" src="./img/city-list-bs02.png"/>
+</div>
+<span class="city-name-text">부산</span>
+</a>
+</article>
+<article class="popular-item" role="presentation">
+<a href="#">
+<div class="popular-thumbnail">
+<img alt="경주" src="./img/city-list-kj.jpg"/>
+</div>
+<span class="city-name-text">경주</span>
+</a>
+</article>
+<article class="popular-item" role="presentation">
+<a href="#">
+<div class="popular-thumbnail">
+<img alt="제주도" src="./img/city-list-jeju.png"/>
+</div>
+<span class="city-name-text">제주도</span>
+</a>
+</article>
+</div>
+</div>
+</section>
+<!-- 인기 여행지 게스트하우스 추천 -->
+<section aria-label="인기 여행지 게스트하우스 추천" class="popular-section" role="region">
+<div class="popular-content">
+<div class="text-box-wrap">
+<h2 class="section-title">인기 여행지 게스트하우스 추천</h2>
+</div>
+<div class="popular-item-wrap">
+<article class="popular-item" role="presentation">
+<a href="#">
+<div class="popular-thumbnail">
+<img alt="서울 바캉스" src="./img/Thumbnail_01.jpg"/>
+</div>
+<span class="city-name-text">서울 바캉스</span>
+</a>
+</article>
+<article class="popular-item" role="presentation">
+<a href="#">
+<div class="popular-thumbnail">
+<img alt="대전 애견 동반 숙소" src="./img/Thumbnail_02.jpg"/>
+</div>
+<span class="city-name-text">대전 애견 동반 숙소</span>
+</a>
+</article>
+<article class="popular-item" role="presentation">
+<a href="#">
+<div class="popular-thumbnail">
+<img alt="대구" src="./img/Thumbnail_03.jpg"/>
+</div>
+<span class="city-name-text">대구 글램핑</span>
+</a>
+</article>
+<article class="popular-item" role="presentation">
+<a href="#">
+<div class="popular-thumbnail">
+<img alt="부산" src="./img/Thumbnail_04.jpg"/>
+</div>
+<span class="city-name-text">부산 풀파티</span>
+</a>
+</article>
+<article class="popular-item" role="presentation">
+<a href="#">
+<div class="popular-thumbnail">
+<img alt="경주 파티룸" src="./img/Thumbnail_05.jpg"/>
+</div>
+<span class="city-name-text">경주 파티룸</span>
+</a>
+</article>
+<article class="popular-item" role="presentation">
+<a href="#">
+<div class="popular-thumbnail">
+<img alt="제주도 오션뷰" src="./img/Thumbnail_06.jpg"/>
+</div>
+<span class="city-name-text">제주도 오션뷰</span>
+</a>
+</article>
+</div>
+</div>
+</section>
+<!-- 로그인 이벤트 배너 -->
+<section aria-label="로그인 이벤트 배너" class="event-banner" role="region">
+<div class="banner-wrap">
+<img alt="event-banner" src="./img/event-web-banner01.jpg"/>
+</div>
+</section>
+<!-- 지역별 인기 투어 -->
+<section aria-label="지역별 인기 투어" class="region-tour" role="region">
+<div class="region-tours-wrap">
+<div class="tours-box-left">
+<div class="tours-left-img">
+<img alt="tours-img" src="./img/left-main.jpg"/>
+</div>
+<div class="bg-color-opacity">
+<div class="tours-contents-wrap">
+<div class="tours-text">
+<h2 class="tours-title">지역별 인기 투어<br/>입장권 할인!</h2>
+<button class="more-btn">
+<a href="#">
+<span class="more-text">자세히보기</span>
+<img alt="arrow-right" src=""/>
+</a>
+</button>
+</div>
+</div>
+</div>
+<div class="tours-box-right">
+<article aria-label="인기 투어 리스트" class="tour-list-item" role="region">
+<a href="#">
+<div class="tour-item">
+<img alt="tour-img" src="./img/right-thumbnail_01.jpg"/>
+</div>
+<div class="tour-item-text">
+<div class="tour-item-title">인기 투어 리스트1</div>
+<div class="discount" style="display: none;"></div>
+<span class="tour-item-price">99,999</span>
+<span class="tour-item-sub">원</span>
+</div>
+</a>
+</article>
+<article aria-label="인기 투어 리스트" class="tour-list-item" role="region">
+<a href="#">
+<div class="tour-item">
+<img alt="tour-img" src="./img/right-thumbnail_02.png"/>
+</div>
+<div class="tour-item-text">
+<div class="tour-item-title">인기 투어 리스트2</div>
+<div class="discount" style="display: none;"></div>
+<span class="tour-item-price">99,999</span>
+<span class="tour-item-sub">원</span>
+</div>
+</a>
+</article>
+<article aria-label="인기 투어 리스트" class="tour-list-item" role="region">
+<a href="#">
+<div class="tour-item">
+<img alt="tour-img" src="./img/right-thumbnail_03.jpg"/>
+</div>
+<div class="tour-item-text">
+<div class="tour-item-title">인기 투어 리스트3</div>
+<div class="discount" style="display: none;"></div>
+<span class="tour-item-price">99,999</span>
+<span class="tour-item-sub">원</span>
+</div>
+</a>
+</article>
+</div>
+</div>
+</div></section>
+<section aria-label="인기 추천 게스트하우스" class="popular-gh-section" role="region">
+<div class="event-box">
+<div class="text-box">
+<h2 class="section-title">인기 추천 게스트하우스</h2>
+<span class="more-btn"><a href="#">더보기</a></span>
+</div>
+<div class="category-buttons mb-4">
+<button class="btn btn-outline-dark btn-sm active">전체</button>
+<button class="btn btn-outline-dark btn-sm">호텔·리조트</button>
+<button class="btn btn-outline-dark btn-sm">모텔</button>
+<button class="btn btn-outline-dark btn-sm">펜션·풀빌라</button>
+<button class="btn btn-outline-dark btn-sm">게스트하우스</button>
+</div>
+<article aria-label="인기 추천 게스트하우스" class="popular-gh-item" role="region">
+<a href="#">
+<div class="gh-item">
+<img alt="gh-img" src="#"/>
+</div>
+<div class="gh-card-body">
+<div class="tour-item-title">인기 투어 리스트3</div>
+<div class="discount" style="display: none;"></div>
+<span class="tour-item-price">99,999</span>
+<span class="tour-item-sub">원</span>
+</div>
+</a>
+</article>
+</div>
+</section>
+</main>
+<script>
+</script>
+</div>
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<title>고급 푸터 예시</title>
+<link href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet"/>
+<style>
+    body { margin:0; font-family: 'Pretendard Variable','Noto Sans KR',sans-serif; background:#f4f4f4;}
+    .footer-bg {
+      width:100%;
+      background: #273043;
+      color: #f5f6fa;
+      padding: 48px 0 18px 0;
+      font-size: 15px;
+    }
+    .footer-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 36px;
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 44px;
+    }
+    .footer-logo-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .footer-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      margin-top:2px;
+    }
+    .footer-title {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .footer-desc {
+      font-size: 13px;
+      color: #c2c8d2;
+      margin-top: 2px;
+      font-weight: 500;
+    }
+    .footer-newsletter {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 330px;
+      margin-bottom: 10px;
+    }
+    .footer-newsletter input {
+      background: #e8eaed;
+      border: none;
+      border-radius: 4px;
+      padding: 13px 20px;
+      font-size: 15px;
+      outline: none;
+      color: #333;
+      flex: 1 1 210px;
+      min-width: 150px;
+      max-width: 280px;
+      margin-right: 3px;
+    }
+    .footer-newsletter button {
+      background: #188bfa;
+      color: #fff;
+      border: none;
+      padding: 13px 27px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.14s;
+    }
+    .footer-newsletter button:hover { background: #1456ba; }
+    .footer-divider {
+      border: none;
+      border-top: 1px solid #6b7485;
+      margin: 34px 0 26px 0;
+      width: 100%;
+      opacity: 0.45;
+    }
+    .footer-cols {
+      gap: 34px;
+      width: 100%;
+    }
+    .footer-col {
+      min-width: 175px;
+      margin-right: 18px;
+      margin-bottom: 12px;
+      line-height: 1.85;
+    }
+    .footer-col-title {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 11px;
+      color: #ffe277;
+      letter-spacing: -0.5px;
+    }
+    .footer-links, .footer-links a {
+      color: #d8dee9;
+      text-decoration: none;
+      font-size: 15px;
+      margin-bottom: 3px;
+      display: block;
+      transition: color 0.16s;
+    }
+    .footer-links a:hover { color: #ffe277; }
+    .footer-appstore {
+      height: 36px;
+      margin-right: 9px;
+      vertical-align: middle;
+      border-radius: 8px;
+      background: #2b313b;
+      display: inline-block;
+    }
+    .footer-socials {
+      margin-top: 9px;
+      display: flex;
+      gap: 13px;
+    }
+    .footer-socials img {
+      width: 27px;
+      height: 27px;
+      border-radius: 5px;
+      background: #fff;
+      display: inline-block;
+      object-fit: cover;
+      transition: box-shadow 0.13s;
+      box-shadow: 0 0 0 2px #232d3c;
+    }
+    .footer-socials img:hover {
+      box-shadow: 0 0 0 2.5px #188bfa;
+    }
+    .footer-bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 26px;
+      font-size: 14px;
+      color: #b4b9c7;
+    }
+    .footer-bottom-links a {
+      margin-right: 20px;
+      color: #b4b9c7;
+      font-size: 13px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.13s;
+    }
+    .footer-bottom-links a:hover { color: #ffe277; }
+    .footer-names {
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      color: #ffe277;
+    }
+    @media (max-width: 1000px) {
+      .footer-row, .footer-cols, .footer-bottom-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .footer-container { padding: 0 14px; }
+      .footer-newsletter { min-width: 0; width: 100%; }
+      .footer-col { min-width: 120px; }
+    }
+  </style>
+</head>
+<body>
+<div class="footer-bg">
+<div class="footer-container">
+<!-- 상단: 로고, 설명, 뉴스레터 -->
+<div class="footer-row">
+<div>
+<div class="footer-logo-group">
+<img alt="로고" class="footer-logo" src="image/logo.jpg"/>
+<div>
+<div class="footer-title">YOLOLane</div>
+<div class="footer-desc">Beyond Accommodation. Connect &amp; Experience.</div>
+</div>
+</div>
+<form class="footer-newsletter" onsubmit="event.preventDefault(); alert('뉴스레터 구독 완료!');">
+<input placeholder="이메일을 입력하세요" required="" type="email"/>
+<button type="submit">구독하기</button>
+</form>
+</div>
+<div class="footer-socials">
+<img alt="YouTube" src="image/youtube.jpg" title="YouTube"/>
+<img alt="Facebook" src="image/facebook.jpg" title="Facebook"/>
+<img alt="Instagram" src="image/instagram.jpg" title="Instagram"/>
+<img alt="Kakao" src="image/kakao.jpg" title="Kakao"/>
+<img alt="Naver" src="image/naver.jpg" title="Naver"/>
+</div>
+</div>
+<hr class="footer-divider"/>
+<!-- 중단: 정보 컬럼 -->
+<div class="footer-row footer-cols">
+<div class="footer-col">
+<div class="footer-col-title">회사 정보</div>
+<div class="footer-links">
+<a href="#">회사소개</a>
+<a href="#">인재채용</a>
+<a href="#">제휴문의</a>
+<a href="#">오시는 길</a>
+</div>
+</div>
+<div class="footer-col">
+<div class="footer-col-title">고객 지원</div>
+<div class="footer-links">
+<a href="#">자주 묻는 질문</a>
+<a href="#">1:1 문의</a>
+<a href="#">서비스 이용약관</a>
+<a href="#">개인정보처리방침</a>
+</div>
+</div>
+<div class="footer-col">
+<div class="footer-col-title">서비스</div>
+<div class="footer-links">
+<a href="#">숙소 검색</a>
+<a href="#">리뷰/평가</a>
+<a href="#">회원 혜택</a>
+<a href="#">이벤트</a>
+</div>
+</div>
+<div class="footer-col">
+<div class="footer-col-title">앱 다운로드</div>
+<div style="margin-bottom:10px;">
+<img alt="App Store" class="footer-appstore" src="image/appstore.jpg"/>
+<img alt="Google Play" class="footer-appstore" src="image/googleplay.jpg"/>
+</div>
+<div style="margin-bottom: 7px; margin-top: 10px; font-weight:600; color:#ffe277;">YOLOLane 공식앱에서 더 쉽고 빠르게!</div>
+</div>
+</div>
+<hr class="footer-divider"/>
+<!-- 하단: 저작권 및 대표 정보, 하단 링크 -->
+<div class="footer-bottom-row">
+<div class="footer-bottom-links">
+<a href="#">이용약관</a>
+<a href="#">개인정보처리방침</a>
+<a href="#">법적고지</a>
+<a href="#">고객센터</a>
+</div>
+<span class="footer-names">
+          대표: 이윤열, 장영민, 박성우 | 사업자등록번호: 123-45-67890
+        </span>
+</div>
+<div style="font-size:13px; margin-top:13px; color:#a2adc3;">
+        ⓒ 2024 YOLOLane Corp. All rights reserved. | 서울시 강남구 테헤란로 123 | 대표전화 02-1234-5678
+      </div>
+</div>
+</div>
+</body>
+</html>
+</body>
+</html>

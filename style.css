@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  font-family: 'Pretendard Variable', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  background-color: #f4f4f4;
+}
+.header {
+  width: 100%;
+  background-color: #2d4373;
+  color: #fff;
+  padding: 24px 0 12px 30px;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  box-shadow: 0 2px 8px rgba(44,67,115,0.06);
+}
+.footer {
+  width: 100%;
+  background-color: #eee;
+  color: #666;
+  padding: 22px 0 15px 30px;
+  font-size: 15px;
+  text-align: left;
+  border-top: 1px solid #ddd;
+  margin-top: 70px;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 250px;
+  background-color: #fff;
+  border-right: 1px solid #ccc;
+  padding: 20px;
+  height: 100vh;
+  min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+}
+.sidebar h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar li {
+  margin: 12px 0;
+}
+.sidebar a, .sidebar li {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+.sidebar a:hover, .sidebar li:hover {
+  background-color: #f0f0f0;
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>예약 조회</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { margin: 0; font-family: 'Pretendard Variable', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; background-color: #f4f4f4;}
+    .container { display: flex; min-height: 100vh;}
+    .main-content { flex: 1; padding: 60px 80px; background-color: #fff;}
+    .booking-header { font-size: 26px; font-weight: 700; margin-bottom: 30px; border-bottom: 2px solid #ccc; padding-bottom: 15px;}
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);}
+    th, td { border: 1px solid #ddd; padding: 14px; text-align: center; font-size: 15px;}
+    th { background-color: #f9f9f9; font-weight: 700;}
+    .status-ok { color: #007bff; font-weight: bold;}
+    .status-cancelled { color: #dc3545; font-weight: bold;}
+    .pagination { text-align: center; margin-top: 20px;}
+    .pagination button { padding: 8px 14px; margin: 0 5px; font-size: 14px; border: none; background-color: #007bff; color: white; border-radius: 5px; cursor: pointer;}
+    .pagination button:hover { background-color: #0056b3;}
+    .search-container { display: flex; gap:10px; justify-content: flex-end; align-items: center; margin-bottom: 20px;}
+    .search-container button { padding: 8px 16px; background-color: #28a745; color: white; border: none; border-radius: 5px; font-size: 14px; cursor: pointer;}
+    .search-container button + button { margin-left: 10px; }
+    .search-container button:hover { background-color: #1e7e34;}
+    .date-search-wrap { margin-top: 10px; text-align: right; animation: fadeIn .3s;}
+    .date-input { padding:7px 10px; border-radius:5px; border:1px solid #bbb; font-size:14px;}
+    .date-search-btn { background-color:#198cff; margin-left:8px; }
+    .date-search-btn:hover { background-color:#1760b3; }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+  </style>
+</head>
+<body>
+  <div id="header-container"></div>
+  <div class="container">
+    <div id="sidebar-container"></div>
+    <div class="main-content">
+      <div class="booking-header">예약 내역</div>
+      <div class="search-container">
+        <button onclick="searchBooking()">예약 조회</button>
+        <button onclick="toggleDateSearch()">날짜로 조회</button>
+      </div>
+      <div id="date-search-box"></div>
+      <table>
+        <thead>
+          <tr>
+            <th>상태</th>
+            <th>숙소명</th>
+            <th>체크인</th>
+            <th>체크아웃</th>
+            <th>인원</th>
+            <th>결제금액</th>
+            <th>예약일</th>
+          </tr>
+        </thead>
+        <tbody id="booking-list"></tbody>
+      </table>
+      <div class="pagination" id="pagination"></div>
+    </div>
+  </div>
+  <div id="footer-container"></div>
+  <script>
+    // 더미 예약 데이터
+    const DUMMY_BOOKINGS = [
+      { status: '예약완료', name: '강남 도미토리', checkin: '2025-07-01', checkout: '2025-07-03', people: 1, price: '34,000원', date: '2025-06-10' },
+      { status: '예약취소', name: '부산 해운대', checkin: '2025-06-20', checkout: '2025-06-22', people: 2, price: '40,000원', date: '2025-06-01' },
+      { status: '예약완료', name: '제주도 한달살이', checkin: '2025-08-01', checkout: '2025-08-31', people: 1, price: '500,000원', date: '2025-06-05' },
+      { status: '예약완료', name: '속초 바다뷰 게스트하우스', checkin: '2025-07-10', checkout: '2025-07-12', people: 2, price: '90,000원', date: '2025-06-15' },
+      { status: '예약취소', name: '인천 공항 근처 모텔', checkin: '2025-06-25', checkout: '2025-06-26', people: 1, price: '20,000원', date: '2025-06-10' },
+      { status: '예약완료', name: '전주 한옥마을 숙소', checkin: '2025-09-01', checkout: '2025-09-03', people: 3, price: '150,000원', date: '2025-06-18' },
+      { status: '예약완료', name: '경주 유적지 근처 숙소', checkin: '2025-07-05', checkout: '2025-07-06', people: 2, price: '50,000원', date: '2025-06-20' },
+      { status: '예약완료', name: '여수 오션뷰 호텔', checkin: '2025-07-15', checkout: '2025-07-17', people: 2, price: '120,000원', date: '2025-06-21' },
+      { status: '예약취소', name: '대전 시내 모텔', checkin: '2025-07-10', checkout: '2025-07-11', people: 1, price: '25,000원', date: '2025-06-22' },
+      { status: '예약완료', name: '광주 호남대 근처 게스트하우스', checkin: '2025-07-20', checkout: '2025-07-22', people: 2, price: '60,000원', date: '2025-06-23' },
+      { status: '예약완료', name: '울산 해안도로 숙소', checkin: '2025-07-25', checkout: '2025-07-26', people: 2, price: '70,000원', date: '2025-06-24' }
+    ];
+
+    const rowsPerPage = 10;
+    let currentPage = 1;
+    let bookings = [];
+
+    function loadBookings() {
+      let realBookings = [];
+      if (localStorage.getItem('reservations')) {
+        realBookings = JSON.parse(localStorage.getItem('reservations'));
+      }
+      bookings = DUMMY_BOOKINGS.concat(realBookings);
+    }
+
+    function renderTable(data) {
+      const bookingList = document.getElementById('booking-list');
+      bookingList.innerHTML = '';
+      if (data.length === 0) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td colspan="7" style="color:#888; font-size:16px;">해당 내역이 없습니다.</td>`;
+        bookingList.appendChild(tr);
+        return;
+      }
+      const start = (currentPage - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+      const currentData = data.slice(start, end);
+      currentData.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="${item.status === '예약취소' ? 'status-cancelled' : 'status-ok'}">${item.status}</td>
+          <td>${item.name}</td>
+          <td>${item.checkin}</td>
+          <td>${item.checkout}</td>
+          <td>${item.people}명</td>
+          <td>${item.price}</td>
+          <td>${item.date}</td>
+        `;
+        bookingList.appendChild(tr);
+      });
+    }
+
+    function renderPagination(data) {
+      const pagination = document.getElementById('pagination');
+      pagination.innerHTML = '';
+      const pageCount = Math.ceil(data.length / rowsPerPage);
+      if (pageCount <= 1) return;
+      for (let i = 1; i <= pageCount; i++) {
+        const button = document.createElement('button');
+        button.textContent = i;
+        button.onclick = () => {
+          currentPage = i;
+          renderTable(data);
+        };
+        pagination.appendChild(button);
+      }
+    }
+
+    function searchBooking() {
+      const keyword = prompt("조회할 숙소명을 입력하세요");
+      let filtered = [];
+      if (keyword) {
+        filtered = bookings.filter(b => b.name.includes(keyword.trim()));
+      }
+      currentPage = 1;
+      renderTable(filtered);           
+      renderPagination(filtered);
+    }
+
+    // 날짜조회 입력창을 아래에 띄우고, 확인 누르면 필터
+    function toggleDateSearch() {
+      const box = document.getElementById('date-search-box');
+      if (box.innerHTML) { box.innerHTML = ""; return; } // 토글(숨김)
+      // 오늘 날짜 구하기
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      const todayStr = `${yyyy}-${mm}-${dd}`;
+
+      box.innerHTML = `
+        <div class="date-search-wrap">
+          <input type="date" id="dateStart" class="date-input" value="${todayStr}">
+          <span>~</span>
+          <input type="date" id="dateEnd" class="date-input" value="${todayStr}">
+          <button class="date-search-btn" onclick="searchByDateInput()">확인</button>
+        </div>
+      `;
+    }
+
+    function searchByDateInput() {
+      const start = document.getElementById('dateStart').value;
+      const end = document.getElementById('dateEnd').value;
+      if (!start || !end) {
+        alert("시작일과 종료일을 모두 선택해주세요.");
+        return;
+      }
+      const filtered = bookings.filter(b =>
+        (b.checkin <= end && b.checkout >= start)
+      );
+      currentPage = 1;
+      renderTable(filtered);
+      renderPagination(filtered);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('header.html').then(r => r.text()).then(h => {
+        document.getElementById('header-container').innerHTML = h;
+      });
+      fetch('footer.html').then(r => r.text()).then(f => {
+        document.getElementById('footer-container').innerHTML = f;
+      });
+      fetch('sidebar.html')
+        .then(response => response.text()) 
+        .then(html => {
+          document.getElementById('sidebar-container').innerHTML = html;
+        });
+
+      loadBookings();
+      renderTable(bookings);
+      renderPagination(bookings);
+    });
+    function goToAdmin() {
+        const pw = prompt("관리자 비밀번호를 입력하세요:");
+        if (pw === "1234") {
+          alert("확인되었습니다. 관리자 페이지로 이동합니다.");
+          location.href = "분석페이지.html";
+        } else if (pw !== null) {
+          alert("비밀번호가 틀렸습니다.");
+        }
+      }
+  </script>
+</body>
+</html>

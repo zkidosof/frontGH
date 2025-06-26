@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>객실 예약</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  
+  <!-- Slick CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+<!-- Slick JS -->
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <style>
+body {
+	font-family: 'Noto Sans KR', sans-serif;
+	padding: 30px;
+	background-color: #f8f9fa;
+}
+
+.container {
+	display: flex;
+	align-items: stretch;
+	justify-content: space-between;
+}
+
+.left, .right {
+	flex: 1;
+	max-width: 48%;
+	background-color: #fff;
+	padding: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+.images {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.images img {
+	width: 48%;
+	border: 3px solid transparent;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.images img.active {
+	border-color: #00BFFF;
+}
+
+input[type="text"], input[type="tel"] {
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+input[readonly] {
+	background-color: #e9ecef;
+}
+
+.title {
+	font-size: 22px;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.btn-reserve {
+	background-color: #0000FF;
+	color: white;
+	font-weight: bold;
+	border-radius: 5px;
+	width: 100%;
+}
+
+.section-title {
+	font-weight: bold;
+	margin-top: 15px;
+}
+
+.inline-flex {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.inline-flex.wide {
+	gap: 20px;
+}
+
+.person-box {
+	flex: 1;
+	padding: 10px;
+	background-color: #f8f9fa;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.calendar-icon {
+	cursor: pointer;
+	margin-left: 10px;
+}
+
+#discountToggle {
+	width: 40px;
+	height: 20px;
+	background-color: #ccc;
+	border-radius: 15px;
+	position: relative;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#discountToggle::before {
+	content: "";
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 16px;
+	height: 16px;
+	background-color: white;
+	border-radius: 50%;
+	transition: all 0.3s;
+}
+
+#discountToggle.on {
+	background-color: #4CAF50;
+}
+
+#discountToggle.on::before {
+	left: 22px;
+}
+
+.visit-method {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 15px;
+}
+
+.visit-option {
+	flex: 1;
+	text-align: center;
+	padding: 10px;
+	border: 2px solid #ccc;
+	border-radius: 8px;
+	cursor: pointer;
+	background-color: #fff;
+	transition: background-color 0.3s, border-color 0.3s;
+}
+
+.visit-option.active {
+	background-color: #e0f7ff;
+	border-color: #00bfff;
+	font-weight: bold;
+}
+
+.coupon-wrapper {
+	position: relative;
+	margin-bottom: 15px;
+}
+
+#selectedCoupon {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	cursor: pointer;
+	background-color: #fff;
+}
+
+.coupon-list {
+	position: absolute;
+	top: 45px;
+	left: 0;
+	width: 100%;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	z-index: 10;
+	max-height: 200px;
+	overflow-y: auto;
+	padding: 10px;
+}
+
+.coupon-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.coupon-item:last-child {
+	margin-bottom: 0;
+}
+
+.coupon-item button {
+	font-size: 0.9em;
+	padding: 4px 10px;
+}
+
+.payment-method {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 15px;
+	flex-wrap: wrap;
+}
+
+.payment-option {
+	font-size: 0.85em;
+	flex: 1 1 45%;
+	text-align: center;
+	padding: 8px;
+	border: 2px solid #ccc;
+	border-radius: 8px;
+	cursor: pointer;
+	background-color: #fff;
+	transition: background-color 0.3s, border-color 0.3s;
+	min-width: 120px;
+	margin-bottom: 8px;
+}
+
+.payment-option.active {
+	background-color: #e0f7ff;
+	border-color: #00bfff;
+	font-weight: bold;
+}
+
+.no-select {
+	cursor: not-allowed;
+	opacity: 1.0;
+}
+
+.slider {
+	position: relative;
+	overflow: visible;
+	margin-bottom: 20px;
+}
+
+.slider .slick-slide {
+	padding: 0 5px;
+	transition: transform 0.3s ease;
+}
+
+.slider img {
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 10px;
+  display: block;
+}
+
+.slick-prev, .slick-next {
+	z-index: 10;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background: none; /* ✅ 검은 배경 제거 */ border : none; width : auto; height
+	: auto;
+	font-size: 0 !important; /* 기본 텍스트 숨기기 */ color : #000; /* 또는 원하는 색상 */
+	cursor: pointer;
+	border: none;
+	width: auto;
+	height: auto; font-size : 0 !important; /* 기본 텍스트 숨기기 */
+	color: #000;
+}
+
+.slick-prev {
+	left: 10px;
+}
+
+.slick-next {
+	right: 10px;
+}
+
+.slick-prev::before {
+	font-size: 24px; /* 원하는 크기로 화살표 보이게 */
+	font-weight: bold;
+	content: "<";
+}
+
+.slick-next::before {
+	font-size: 24px; /* 원하는 크기로 화살표 보이게 */
+	font-weight: bold;
+	content: ">";
+}
+
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+			<div class="title" id="guesthouseTitle">게스트하우스 이름</div>
+<div class="subtitle" id="roomSubtitle" style="font-size: 16px; margin-bottom: 10px; color: #555;"></div>
+			<div class="slider"></div>
+
+			<input type="text" id="reserverName" placeholder="예약자 이름">
+      <input type="tel" id="reserverPhone" placeholder="휴대폰 번호">
+
+      <div class="section-title">방문 방법</div>
+      <div class="visit-method">
+        <div class="visit-option active" data-method="도보 방문">도보 방문</div>
+        <div class="visit-option" data-method="차량 방문">차량 방문</div>
+      </div>
+
+      <div class="sectionS-title">할인 적용</div>
+      <div class="coupon-wrapper">
+        <input type="text" id="selectedCoupon" placeholder="쿠폰 선택" readonly>
+        <div id="couponList" class="coupon-list" style="display: none;"></div>
+      </div>
+      <div class="section-title">결제 수단</div>
+      <div class="payment-method">
+        <div class="payment-option active" data-method="카카오페이">카카오페이</div>
+        <div class="payment-option" data-method="휴대폰결제">휴대폰결제</div>
+        <div class="payment-option" data-method="토스">토스</div>
+        <div class="payment-option" data-method="계좌이체">계좌이체</div>
+        <div class="payment-option" data-method="네이버페이">네이버페이</div>
+        <div class="payment-option" data-method="신용/체크 카드">신용/체크 카드</div>
+        <div class="payment-option" data-method="페이코">페이코</div>
+        <div class="payment-option" data-method="간편 계좌이체">간편 계좌이체</div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div style="text-align:right; font-weight: bold; margin-bottom: 10px;">님 오신걸 환영합니다</div>
+      <!-- 자동 전환되는 이미지 영역 -->
+      <img id="mainDetailImg" src="img/p2.jpg" 
+      	style="width:100%; height:450px; object-fit:cover; border-radius:10px; margin-bottom:15px;">
+
+      <div class="section-title">예약 날짜</div>
+      <div class="inline-flex">
+        <input type="text" id="dateRange" readonly style="flex: 1;">
+        <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" width="25" class="calendar-icon" id="calendarTrigger">
+      </div>
+
+      <div id="datepicker" style="display:none;"></div>
+
+      <div class="section-title">인원 수</div>
+      <div class="inline-flex wide">
+        <div class="person-box">
+          <button class="btn btn-sm btn-secondary" id="removePerson">-</button>
+          <span id="personCount">0</span>
+          <button class="btn btn-sm btn-secondary" id="addPerson">+</button>
+        </div>
+      </div>
+
+      <div class="section-title">결제 정보</div>
+      <input type="text" id="paymentInfo" value="" readonly>
+
+      <button class="btn btn-reserve mt-3">예약하기</button>
+    </div>
+  </div>
+
+  <script>
+  function getQueryParam(name) {
+	  return new URLSearchParams(window.location.search).get(name);
+	}
+    $(function(){
+    	const guesthouseName = getQueryParam('name') || '열 게스트하우스';
+    	  const roomType = getQueryParam('room') || '윤 번방';
+    	  const roomDetail = getQueryParam('detail') || '2인실';
+
+    	  $('#guesthouseTitle').text(guesthouseName);
+    	  $('#roomSubtitle').text(`${roomType} (${roomDetail})`);
+      // 왼쪽 썸네일(사용자 클릭)
+      $('.images img').click(function(){
+        if ($(this).hasClass('no-select')) return;
+        $('.images img').removeClass('active');
+        $(this).addClass('active');
+      });
+
+   // 오른쪽 상세 이미지 자동 전환용 배열 받아오기
+      const detailImages = JSON.parse(decodeURIComponent(getQueryParam('images') || '[]'));
+
+      if (detailImages.length > 0) {
+        let detailIdx = 0;
+        $('#mainDetailImg').attr('src', detailImages[0]);  // 첫 이미지 표시
+
+        setInterval(function(){
+          detailIdx = (detailIdx + 1) % detailImages.length;
+          $('#mainDetailImg').attr('src', detailImages[detailIdx]);
+        }, 3000);
+      }
+
+      // --- 이하 기존 예약 로직 ---
+      let startDate = null, endDate = null;
+
+      function calculateDays(start, end) {
+        const s = new Date(start);
+        const e = new Date(end);
+        return Math.ceil((e - s) / (1000 * 60 * 60 * 24));
+      }
+
+      function updatePayment() {
+        if (!startDate || !endDate) return;
+        const days = calculateDays(startDate, endDate);
+        const persons = parseInt($('#personCount').text());
+        let total = 30000 * days * persons;
+        const isDiscount = $('#discountToggle').hasClass('on');
+        if (isDiscount) {
+          total *= 0.9;
+        }
+        $('#paymentInfo').val(Math.round(total).toLocaleString('ko-KR') + '원');
+      }
+
+      $('#calendarTrigger').click(function() {
+        $('#datepicker').toggle();
+      });
+
+      $('#datepicker').datepicker({
+        dateFormat: 'yy-mm-dd',
+        numberOfMonths: 2,
+        onSelect: function(dateText) {
+          if (!startDate || endDate) {
+            startDate = dateText;
+            endDate = null;
+            $('#dateRange').val(startDate);
+          } else {
+            endDate = dateText;
+            if (new Date(startDate) > new Date(endDate)) {
+              const temp = startDate;
+              startDate = endDate;
+              endDate = temp;
+            }
+            $('#dateRange').val(startDate + ' ~ ' + endDate);
+            $('#datepicker').hide();
+            updatePayment();
+          }
+        }
+      });
+
+      $('#addPerson').click(function() {
+        let count = parseInt($('#personCount').text());
+        $('#personCount').text(count + 1);
+        updatePayment();
+      });
+      
+      $('#removePerson').click(function() {
+        let count = parseInt($('#personCount').text());
+        if (count > 0) {
+          $('#personCount').text(count - 1);
+          updatePayment();
+        }
+      });
+
+      $('#discountToggle').click(function() {
+        $(this).toggleClass('on');
+        updatePayment();
+      });
+      
+      $('.visit-option').click(function() {
+        $('.visit-option').removeClass('active');
+        $(this).addClass('active');
+      });
+
+      const coupons = [
+        { name: '최초 가입 10000원 쿠폰', discount: 10000 },
+        { name: '최초 주문 5000원 쿠폰', discount: 5000 }
+      ];
+
+      $('#selectedCoupon').click(function() {
+        const listBox = $('#couponList');
+        listBox.empty().show();
+
+        if (coupons.length === 0) {
+          listBox.append('<div>쿠폰이 없습니다.</div>');
+        } else {
+          coupons.forEach((coupon, index) => {
+            const item = $(`
+              <div class="coupon-item">
+                <span>${coupon.name}</span>
+                <button class="btn btn-sm btn-primary" data-index="${index}">적용</button>
+              </div>
+            `);
+            listBox.append(item);
+          });
+        }
+      });
+
+      $(document).on('click', '.coupon-item button', function() {
+        const index = $(this).data('index');
+        const selected = coupons[index];
+        $('#selectedCoupon').val(selected.name);
+        $('#couponList').hide();
+        updatePaymentWithCoupon(selected.discount);
+      });
+
+      $(document).mouseup(function(e) {
+        const container = $(".coupon-wrapper");
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+          $('#couponList').hide();
+        }
+      });
+      
+      let appliedDiscount = 0;
+
+      function updatePaymentWithCoupon(discount) {
+        appliedDiscount = discount;
+        updatePayment();
+      }
+
+      function updatePayment() {
+        if (!startDate || !endDate) return;
+        const days = calculateDays(startDate, endDate);
+        const persons = parseInt($('#personCount').text());
+        let total = 30000 * days * persons;
+        total -= appliedDiscount;
+        if (total < 0) total = 0;
+        $('#paymentInfo').val(Math.round(total).toLocaleString('ko-KR') + '원');
+      }
+      
+      $('.payment-option').click(function() {
+        $('.payment-option').removeClass('active');
+        $(this).addClass('active');
+      });
+
+      $('.btn-reserve').click(function() {
+        const name = $('#reserverName').val().trim();
+        const phone = $('#reserverPhone').val().trim();
+        const dateRange = $('#dateRange').val().trim();
+        const personCount = parseInt($('#personCount').text());
+        
+        if (!name) {
+          alert("예약자 이름을 입력하세요.");
+          $('#reserverName').focus();
+          return;
+        }
+
+        if (!phone) {
+          alert("휴대폰 번호를 입력하세요.");
+          $('#reserverPhone').focus();
+          return;
+        }
+
+        if (!dateRange) {
+          alert("예약 날짜를 선택하세요.");
+          return;
+        } 
+
+        if (personCount === 0) {
+          alert("예약 인원을 1명 이상 선택하세요.");
+          return;
+        }
+
+        const confirmed = confirm("정말 예약하시겠습니까?");
+        if (confirmed) {
+          let checkin = startDate;
+          let checkout = endDate;
+
+          if (!checkin || !checkout) {
+            const range = $('#dateRange').val();
+            if (range.includes(' ~ ')) {
+              const parts = range.split(' ~ ');
+              checkin = parts[0];
+              checkout = parts[1];
+            }
+          }
+          const reservation = {
+            status: '예약완료',
+            name: '열 게스트하우스',
+            checkin: checkin,
+            checkout: checkout,
+            people: personCount,
+            price: $('#paymentInfo').val(),
+            date: new Date().toISOString().split('T')[0]
+          };
+
+          const existing = JSON.parse(localStorage.getItem('reservations') || '[]');
+          existing.push(reservation);
+          localStorage.setItem('reservations', JSON.stringify(existing));
+
+          location.href = '예약조회.html';
+        }
+      });
+      
+   // GH 이미지 파라미터 읽고 슬라이더에 삽입
+      const ghImages = JSON.parse(decodeURIComponent(getQueryParam('ghImages') || '[]'));
+      const $slider = $('.slider');
+
+      if (ghImages.length > 0) {
+        ghImages.forEach(src => {
+          $slider.append(`<div><img src="${src}" class="no-select"></div>`);
+        });
+
+        // slick 재초기화
+        $slider.slick({
+          slidesToShow: 2,
+          centerMode: true,
+          centerPadding: '40px',
+          arrows: true,
+          infinite: true
+        });
+      }
+
+    });
+  </script>
+</body>
+</html>

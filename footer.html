@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>고급 푸터 예시</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; font-family: 'Pretendard Variable','Noto Sans KR',sans-serif; background:#f4f4f4;}
+    .footer-bg {
+      width:100%;
+      background: #273043;
+      color: #f5f6fa;
+      padding: 48px 0 18px 0;
+      font-size: 15px;
+    }
+    .footer-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 36px;
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 44px;
+    }
+    .footer-logo-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .footer-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      margin-top:2px;
+    }
+    .footer-title {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .footer-desc {
+      font-size: 13px;
+      color: #c2c8d2;
+      margin-top: 2px;
+      font-weight: 500;
+    }
+    .footer-newsletter {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 330px;
+      margin-bottom: 10px;
+        flex-wrap: nowrap; /* 줄바꿈 아예 방지 */
+    }
+    .footer-newsletter input {
+      background: #e8eaed;
+      border: none;
+      border-radius: 4px;
+      padding: 13px 20px;
+      font-size: 15px;
+      outline: none;
+      color: #333;
+      flex: 1 1 210px;
+      min-width: 150px;
+      max-width: 280px;
+      margin-right: 3px;
+    }
+  .footer-newsletter button {
+      background: #188bfa;
+      color: #fff;
+      border: none;
+      padding: 13px 27px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.14s;
+       white-space: nowrap;       /* ✅ 줄바꿈 방지 */
+ 	 min-width: 120px;          /* ✅ 버튼 넓이 확보 */
+    }
+    
+    .footer-newsletter button:hover { background: #1456ba; }
+    .footer-divider {
+      border: none;
+      border-top: 1px solid #6b7485;
+      margin: 34px 0 26px 0;
+      width: 100%;
+      opacity: 0.45;
+    }
+    .footer-cols {
+      gap: 34px;
+      width: 100%;
+    }
+    .footer-col {
+      min-width: 175px;
+      margin-right: 18px;
+      margin-bottom: 12px;
+      line-height: 1.85;
+    }
+    .footer-col-title {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 11px;
+      color: #ffe277;
+      letter-spacing: -0.5px;
+    }
+    .footer-links, .footer-links a {
+      color: #d8dee9;
+      text-decoration: none;
+      font-size: 15px;
+      margin-bottom: 3px;
+      display: block;
+      transition: color 0.16s;
+    }
+    .footer-links a:hover { color: #ffe277; }
+    .footer-appstore {
+      height: 36px;
+      margin-right: 9px;
+      vertical-align: middle;
+      border-radius: 8px;
+      background: #2b313b;
+      display: inline-block;
+    }
+    .footer-socials {
+      margin-top: 9px;
+      display: flex;
+      gap: 13px;
+    }
+    .footer-socials img {
+      width: 27px;
+      height: 27px;
+      border-radius: 5px;
+      background: #fff;
+      display: inline-block;
+      object-fit: cover;
+      transition: box-shadow 0.13s;
+      box-shadow: 0 0 0 2px #232d3c;
+    }
+    .footer-socials img:hover {
+      box-shadow: 0 0 0 2.5px #188bfa;
+    }
+    .footer-bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 26px;
+      font-size: 14px;
+      color: #b4b9c7;
+    }
+    .footer-bottom-links a {
+      margin-right: 20px;
+      color: #b4b9c7;
+      font-size: 13px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.13s;
+    }
+    .footer-bottom-links a:hover { color: #ffe277; }
+    .footer-names {
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      color: #ffe277;
+    }
+    @media (max-width: 1000px) {
+      .footer-row, .footer-cols, .footer-bottom-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .footer-container { padding: 0 14px; }
+      .footer-newsletter { min-width: 0; width: 100%; }
+      .footer-col { min-width: 120px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="footer-bg">
+    <div class="footer-container">
+      <!-- 상단: 로고, 설명, 뉴스레터 -->
+      <div class="footer-row">
+        <div>
+          <div class="footer-logo-group">
+            <img src="image/logo2.jpg" alt="로고" class="footer-logo">
+            <div>
+              <div class="footer-title">YOLOLane</div>
+              <div class="footer-desc">Beyond Accommodation. Connect & Experience.</div>
+            </div>
+          </div>
+          <form class="footer-newsletter" onsubmit="event.preventDefault(); alert('뉴스레터 구독 완료!');">
+            <input type="email" placeholder="이메일을 입력하세요" required>
+            <button type="submit">구독하기</button>
+          </form>
+        </div>
+        <div class="footer-socials">
+          <img src="image/youtube.jpg" alt="YouTube" title="YouTube">
+          <img src="image/facebook.jpg" alt="Facebook" title="Facebook">
+          <img src="image/instagram.jpg" alt="Instagram" title="Instagram">
+          <img src="image/kakao.jpg" alt="Kakao" title="Kakao">
+          <img src="image/naver.jpg" alt="Naver" title="Naver">
+        </div>
+      </div>
+      <hr class="footer-divider">
+      <!-- 중단: 정보 컬럼 -->
+      <div class="footer-row footer-cols">
+        <div class="footer-col">
+          <div class="footer-col-title">회사 정보</div>
+          <div class="footer-links">
+            <a href="#">회사소개</a>
+            <a href="#">인재채용</a>
+            <a href="#">제휴문의</a>
+            <a href="#">오시는 길</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">고객 지원</div>
+          <div class="footer-links">
+            <a href="#">자주 묻는 질문</a>
+            <a href="#">1:1 문의</a>
+            <a href="#">서비스 이용약관</a>
+            <a href="#">개인정보처리방침</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">서비스</div>
+          <div class="footer-links">
+            <a href="#">숙소 검색</a>
+            <a href="#">리뷰/평가</a>
+            <a href="#">회원 혜택</a>
+            <a href="#">이벤트</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">앱 다운로드</div>
+          <div style="margin-bottom:10px;">
+            <img src="image/appstore.jpg" alt="App Store" class="footer-appstore">
+            <img src="image/googleplay.jpg" alt="Google Play" class="footer-appstore">
+          </div>
+          <div style="margin-bottom: 7px; margin-top: 10px; font-weight:600; color:#ffe277;">YOLOLane 공식앱에서 더 쉽고 빠르게!</div>
+        </div>
+      </div>
+      <hr class="footer-divider">
+      <!-- 하단: 저작권 및 대표 정보, 하단 링크 -->
+      <div class="footer-bottom-row">
+        <div class="footer-bottom-links">
+          <a href="#">이용약관</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#">법적고지</a>
+          <a href="#">고객센터</a>
+        </div>
+        <span class="footer-names">
+          대표: 이윤열, 장영민, 박성우 | 사업자등록번호: 123-45-67890
+        </span>
+      </div>
+      <div style="font-size:13px; margin-top:13px; color:#a2adc3;">
+        ⓒ 2024 YOLOLane Corp. All rights reserved. | 서울시 강남구 테헤란로 123 | 대표전화 02-1234-5678
+      </div>
+    </div>
+  </div>
+</body>
+</html>

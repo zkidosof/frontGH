@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>제주 여성 게스트하우스</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+body {
+	margin: 0;
+	background: #f6f8fa;
+	color: #222;
+}
+
+.main-wrap {
+	max-width: 1020px;
+	margin: 38px auto 28px auto;
+	padding: 0 10px;
+}
+
+.slider-box {
+	background: #fff;
+	border: 3px solid #2196f3;
+	border-radius: 10px;
+	overflow: hidden;
+	position: relative;
+	height: 248px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 26px;
+}
+
+.slider-img {
+	width: 100%;
+	height: 248px;
+	object-fit: cover;
+	transition: opacity 0.4s;
+}
+
+.slider-arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 38px;
+	height: 38px;
+	background: rgba(0, 0, 0, 0.18);
+	color: #fff;
+	border-radius: 50%;
+	border: none;
+	font-size: 1.3rem;
+	cursor: pointer;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.18s;
+}
+
+.slider-arrow.left {
+	left: 14px;
+}
+
+.slider-arrow.right {
+	right: 14px;
+}
+
+.slider-arrow:hover {
+	background: rgba(33, 150, 243, 0.25);
+}
+
+.promo-banner {
+	margin: 0 0 18px 0;
+	background: #f0f8ff;
+	border-radius: 8px;
+	padding: 15px 24px 15px 18px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 1.04rem;
+	font-weight: 500;
+	color: #2071d6;
+	box-shadow: 0 2px 8px #c5e1ff28;
+}
+
+.promo-banner strong {
+	color: #138aff;
+	font-weight: 800;
+	margin-right: 5px;
+}
+
+.promo-rate {
+	background: #138aff;
+	color: #fff;
+	border-radius: 7px;
+	font-size: 1rem;
+	font-weight: 800;
+	padding: 4px 16px;
+	margin-left: 16px;
+	display: inline-block;
+	box-shadow: 0 2px 7px #a7cfff18;
+}
+
+.room-title {
+	font-size: 1.3rem;
+	font-weight: 700;
+	margin: 0 0 12px 0;
+	color: #181d29;
+}
+
+.room-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.room-card {
+	background: #fff;
+	border-radius: 11px;
+	box-shadow: 0 3px 12px #dde4ee22;
+	display: flex;
+	align-items: flex-start;
+	gap: 22px;
+	padding: 19px 20px;
+	margin-bottom: 18px;
+}
+
+.room-thumb {
+	width: 112px;
+	height: 90px;
+	object-fit: cover;
+	border-radius: 8px;
+	background: #ececec;
+}
+
+.room-info {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.room-desc {
+	font-size: 1rem;
+	font-weight: 500;
+	color: #24292f;
+	margin-bottom: 4px;
+}
+
+.room-detail {
+	font-size: 0.93rem;
+	color: #7e8493;
+	margin-bottom: 4px;
+}
+
+.room-price {
+	font-size: 1.1rem;
+	font-weight: 800;
+	color: #1877f2;
+	margin-bottom: 2px;
+}
+
+.room-btn-wrap {
+	display: flex;
+	flex: 1;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+.room-btn {
+	background: #1877f2;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	font-size: 1rem;
+	font-weight: 700;
+	padding: 7px 18px;
+	cursor: pointer;
+	transition: background 0.2s;
+	box-shadow: 0 1px 5px #e3e8ee44;
+}
+
+.room-btn:hover {
+	background: #1461bb;
+}
+
+@media ( max-width : 800px) {
+	.main-wrap {
+		max-width: 99vw;
+		padding: 0 2vw;
+	}
+	.room-card {
+		flex-direction: column;
+		align-items: stretch;
+	}
+	.room-btn-wrap {
+		justify-content: flex-start;
+	}
+}
+
+.slider img {
+  width: 100%;
+  height: 200px;         /* 원하는 고정 높이 */
+  object-fit: cover;     /* 넘치는 부분은 잘라내고 꽉 채움 */
+  border-radius: 10px;
+  display: block;
+}
+</style>
+</head>
+<body>
+  <!-- 헤더 외부파일 -->
+  <div id="header-container"></div>
+  <div class="main-wrap">
+    <!-- 슬라이더 (여러 이미지! 아래에 추가 가능) -->
+    <div class="slider-box">
+      <button class="slider-arrow left" onclick="changeSlide(-1)">&#60;</button>
+      <!-- ★ 대표 이미지 여러 장 중 하나 표시 -->
+      <img id="main-slider-img" class="slider-img" src="image/room/room01.jpg" alt="게스트하우스 대표사진">
+      <button class="slider-arrow right" onclick="changeSlide(1)">&#62;</button>
+    </div>
+    <div class="room-title" id="guesthouse-name" data-name="제주도 게스트하우스 파티어울림"> 제주도게스트하우스파티어울림25
+</div>
+    <div class="promo-banner">
+      <span>
+        <strong>50% 할인 쿠폰 & 포인트 제공!</strong><br>
+        오직 홈페이지에서만, 체크인 시 프론트에서 즉시 발급
+      </span>
+      <span class="promo-rate">50%</span>
+    </div>
+    <!-- 객실 리스트 -->
+    <ul class="room-list">
+      <li class="room-card">
+        <!-- ★ 객실 이미지 넣는 부분 -->
+        <img class="room-thumb" src="image/room/room05.jpg" alt="4인실">
+        <div class="room-info">
+          <div>
+            <div class="room-desc">2인실</div>
+            <div class="room-detail">여성 오션뷰 2인실 1시퇴실/공항픽업</div>
+            <div class="room-price">9,900원<span style="font-weight:400; font-size:14px;">/박</span></div>
+          </div>
+          <div class="room-btn-wrap">
+            <button class="room-btn" onclick="goToReservation('2인실', '여성 전용', ['image/room/room05.jpg','image/room/room05_b.jpg','image/room/room05_c.jpg'])">예약하기</button>
+
+          </div>
+        </div>
+      </li>
+      <li class="room-card">
+              <!-- ★ 객실 이미지 넣는 부분 -->
+        <img class="room-thumb" src="image/room/room06.jpg" alt="4인실">
+        <div class="room-info">
+          <div>
+            <div class="room-desc">4인실</div>
+            <div class="room-detail">남성 한라산뷰 4인 도미토리 1시퇴실</div>
+            <div class="room-price">25,000원<span style="font-weight:400; font-size:14px;">/박</span></div>
+          </div>
+          <div class="room-btn-wrap">
+            <button class="room-btn" onclick="goToReservation('4인실', '남성 전용',['image/room/room06.jpg','image/room/room06_b.jpg','image/room/room06_c.jpg'])">예약하기</button>
+
+          </div>
+        </div>
+      </li>
+      <li class="room-card">
+        <!-- ★ 객실 이미지 넣는 부분 -->
+        <img class="room-thumb" src="image/room/room07.jpg" alt="6인실">
+        <div class="room-info">
+          <div>
+            <div class="room-desc">2인실</div>
+            <div class="room-detail">단독객실 완벽한 오션뷰 디럭스 더블</div>
+            <div class="room-price">75,000원<span style="font-weight:400; font-size:14px;">/박</span></div>
+          </div>
+          <div class="room-btn-wrap">
+            <button class="room-btn" onclick="goToReservation('6인실', '혼성',['image/room/room07.jpg','image/room/room07_b.jpg','image/room/room07_c.jpg'])">예약하기</button>
+
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- 푸터 외부파일 -->
+  <div id="footer-container"></div>
+  <script>
+    // 헤더/푸터 외부에서 불러오기
+    fetch('header.html').then(r => r.text()).then(h => {
+      document.getElementById('header-container').innerHTML = h;
+    });
+    fetch('footer.html').then(r => r.text()).then(f => {
+      document.getElementById('footer-container').innerHTML = f;
+    });
+
+    // ★ 슬라이더 이미지 배열 (내부 파일 사용)
+    const sliderImages = [
+      "image/gh/GH05.jpg",
+      "image/gh/GH06.jpg",
+      "image/gh/GH07.jpg",
+      "image/gh/GH08.jpg"
+    ];
+    let currentSlide = 0;
+    function showSlide(idx) {
+      currentSlide = (idx + sliderImages.length) % sliderImages.length;
+      document.getElementById('main-slider-img').src = sliderImages[currentSlide];
+    }
+    function changeSlide(dir) {
+      showSlide(currentSlide + dir);
+    }
+    // 첫 로드 시 0번 이미지로
+    showSlide(0);
+    
+    function goToReservation(roomType, roomDetail, imageList) {
+    	  const guesthouseName = $('.room-title').text().trim();
+    	  const url = new URL('/Workshop15/reservation.html', window.location.origin);
+
+    	  const ghImages = [
+    	    "image/gh/GH05_a.jpg",
+    	    "image/gh/GH06.jpg",
+    	    "image/gh/GH07.jpg",
+    	    "image/gh/GH08.jpg"
+    	  ];
+
+    	  url.searchParams.set('name', guesthouseName);
+    	  url.searchParams.set('room', roomType);
+    	  url.searchParams.set('detail', roomDetail);
+    	  url.searchParams.set('images', JSON.stringify(imageList));
+    	  url.searchParams.set('ghImages', JSON.stringify(ghImages)); // ✅ 추가
+
+    	  window.location.href = url.toString();
+    	}
+  </script>
+</body>
+</html>

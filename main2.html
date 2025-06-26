@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>YOLOLANE | 게스트하우스, 여행지 숙소 예약 대표 플렛폼</title>
+    <style>
+        /* 기존 * 및 html, body 스타일은 유지 */
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0px;
+            height: 100%;
+        }
+
+        /* 버튼 포커스 스타일 */
+        button:focus-visible {
+            outline: 2px solid #4a90e2;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* --- 전체 콘텐츠 컨테이너 추가 --- */
+        .container-wrapper {
+            /* width: 100%; <- 기본값이므로 생략 가능 */
+            margin: 0 auto; /* 가로 중앙 정렬 */
+            max-width: 1200px; /* 최대 너비를 1200px로 제한 */
+            padding: 0 20px; /* 양쪽에 기본 패딩을 줘서 최소한의 여백 확보 (선택 사항) */
+            /* 배경색 등이 필요한 경우 여기에 지정할 수 있습니다. */
+        }
+
+        /* --- 헤더 및 각 섹션 스타일 수정 --- */
+        #main-header {
+            position: relative;
+            width: 100%; /* 부모 .container-wrapper에 맞춰 100% */
+            height: 80px;
+            /* background-color: aqua; */
+            /* max-width는 .container-wrapper가 처리하므로 여기선 제거 */
+        }
+
+        /* header-top, section-item 등 1200px을 직접 가지던 요소들은 이제 100%를 가집니다. */
+        .header-top {
+            display: flex;
+            width: 100%; /* 부모 .container-wrapper의 1200px (혹은 그 이하)를 상속 */
+            height: 80px;
+            align-items: center;
+            justify-content: space-between;
+            /* margin: auto; 는 더 이상 필요 없음 (부모가 중앙 정렬됨) */
+        }
+
+        /* home-search-section의 배경 이미지와 콘텐츠 분리 (이전 답변과 동일) */
+        .home-search-seciton {
+            position: relative;
+            width: 100%;
+            height: 600px; /* 고정 높이 */
+            overflow: hidden;
+            margin-bottom: 50px; /* 섹션 간의 여백 (예시) */
+        }
+
+        .home-search-seciton > img { /* 배경 이미지 스타일 */
+            position: absolute;
+            top: 0;
+            left: 0; /* left: 50%; transform: translateX(-50%); 대신 이렇게 단순화할 수도 있습니다. */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* 섹션 내 콘텐츠 영역은 .container-wrapper의 자식으로 직접 들어가는 경우를 상정합니다. */
+        /* 만약 .section-item이 home-search-section 바로 아래에 있다면, 다음과 같이 조정합니다. */
+        .section-item { /* 1200px 콘텐츠가 들어갈 영역 (이제 100%를 가짐) */
+            position: relative;
+            width: 100%; /* 부모 .home-search-seciton의 100%를 채움 */
+            height: 100%;
+            /* margin: 0 auto; 는 이젠 .container-wrapper가 담당 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+            text-align: center;
+            color: #fff;
+        }
+
+
+        /* 이벤트 섹션, 인기 여행지 섹션 등 다른 섹션들도 이제 .container-wrapper의 자식이 되므로 100% 너비를 가집니다. */
+        .event-box,
+        .popular-content,
+        .region-tours-box,
+        .popular-gh-section .event-box { /* 이 클래스들이 이제 컨테이너 역할을 합니다. */
+            width: 100%; /* 부모 .container-wrapper의 100%를 사용 */
+            /* 기존의 1200px 너비를 가진다면 제거합니다. */
+            /* margin: 0 auto; 는 더 이상 필요 없음 */
+        }
+
+        /* 기존 로고 및 버튼 스타일 등은 유지 */
+        .logo-kor {
+            position: relative;
+            width: 180px;
+            height: 60px;
+            background-image: url("./img/main-logo-kor.png");
+            background-size: cover;
+            background-position: 50% 50%;
+        }
+
+        .user-button {
+            display: flex;
+            width: 285px; /* 이 너비는 고정할지 유동적으로 할지 결정 */
+            align-items: center;
+            gap: 90px;
+            position: relative;
+        }
+
+        .login-btn {
+            all: unset;
+            box-sizing: border-box;
+            display: inline-flex;
+            height: 48px;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            position: relative;
+            border-radius: 12px;
+            border: 2px solid #DDE1E6;
+            color: #333333; /* # 추가 */
+        }
+
+        .menu-toggle {
+            all: unset;
+            box-sizing: border-box;
+            position: relative;
+            width: 40px;
+            height: 50px;
+            background-color: transparent;
+        }
+
+        .btn-text {
+            width: fit-content;
+            color: #333333;
+        }
+
+        /* 기타 스타일 */
+        .section-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        /* 각 섹션별 내부 아이템 리스트 (예: event-section, popular-section) */
+        .item-list,
+        .popular-item-list,
+        .tour-list-item,
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap; /* 요소들이 다음 줄로 넘어갈 수 있도록 */
+            justify-content: space-between; /* 양쪽 끝에 붙이고 사이 공간 균등 분배 */
+            gap: 20px; /* 아이템 사이의 간격 */
+            margin-bottom: 30px; /* 섹션 하단 여백 */
+        }
+
+        /* 아이템의 크기 조절 (예시) */
+        .item, .popular-item, .tour-list-item, .gh-item {
+            flex: 1 1 calc(33.33% - 20px); /* 3개씩, gap 고려 */
+            min-width: 280px; /* 너무 작아지지 않도록 최소 너비 설정 */
+            /* 다른 아이템별 스타일 */
+        }
+
+        /* 2개씩 표시되는 경우 (예: region-tours-box 내부) */
+        .torus-box-right {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .torus-box-right .tour-list-item {
+            flex: 1 1 calc(50% - 10px); /* 2개씩, gap 고려 */
+            min-width: 250px;
+        }
+
+        /* 반응형을 위한 미디어 쿼리 (예시: 화면이 768px보다 작을 때) */
+        @media (max-width: 1240px) { /* container-wrapper padding 고려 */
+            .container-wrapper {
+                padding: 0 20px; /* 화면이 작아질 때 양쪽 여백을 고정 값으로 */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container-wrapper {
+                max-width: 100%; /* 모바일에서는 최대 너비 제한 해제 */
+                padding: 0 15px;
+            }
+
+            .header-top {
+                width: 100%;
+                padding: 0 15px; /* 모바일 헤더 패딩 */
+            }
+
+            .home-search-seciton {
+                height: 400px; /* 모바일에서 높이 줄이기 */
+            }
+
+            .banenr-text {
+                font-size: 2em; /* 모바일에서 폰트 크기 줄이기 */
+            }
+
+            .item, .popular-item {
+                flex: 1 1 calc(50% - 15px); /* 모바일에서 2개씩 표시 (예시) */
+                min-width: unset;
+            }
+            .item:last-child { /* 3번째 아이템이 혼자 남는 경우 */
+                flex: 1 1 100%;
+            }
+
+            .torus-box-right .tour-list-item {
+                flex: 1 1 100%; /* 모바일에서 1개씩 표시 */
+            }
+
+            .user-button {
+                gap: 30px; /* 모바일에서 버튼 간격 줄이기 */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .user-button {
+                width: auto; /* 너비 자동 조절 */
+                flex-grow: 1; /* 남은 공간 채우기 */
+                justify-content: flex-end; /* 오른쪽으로 붙이기 */
+                gap: 15px;
+            }
+            .login-btn {
+                padding: 6px 10px;
+                height: 40px;
+                font-size: 0.9em;
+            }
+            .logo-kor {
+                width: 140px;
+                height: 45px;
+            }
+            .menu-toggle {
+                width: 35px;
+                height: 45px;
+            }
+
+            .home-search-seciton {
+                height: 300px;
+            }
+            .search-box {
+                width: 90%; /* 모바일 검색 박스 너비 */
+            }
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(function () {
+            // 여기에 JS 코드 추가 (예: 햄버거 메뉴 토글 등)
+        }); //ready;
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="container-wrapper">
+            <header id="main-header">
+                <div class="header-top">
+                    <div class="logo-kor">
+                        <a href="#">
+                            </a>
+                    </div>
+                    <div class="user-button" aria-label="로그아웃 상황">
+                        <button type="button" class="login-btn" data-modal-target="#login-modal">
+                            <span class="btn-text">로그인/회원가입</span>
+                        </button>
+                        <button type="button" class="menu-toggle" aria-label="메뉴 열기">
+                            <img src="./img/hamburger.png" alt="메뉴 아이콘">
+                        </button>
+                    </div>
+                    <div class="header-login" style="display: none;">
+                        <button type="button" class="user-profile"> <img src="#" alt="user-profile-img">
+                            <span class="user-nickname"></span>
+                            <span class="grade"></span>
+                            <button type="button" class="btn-hamburger-menu">
+                                <span class="line"></span>
+                                <span class="line"></span>
+                                <span class="line"></span>
+                            </button>
+                        </button>
+                    </div>
+                </div>
+                <nav class="side-nav" style="display: none;">
+                    </nav>
+            </header>
+        </div> <main class="main-content">
+            <section role="region" aria-label="top-main-visual" class="home-search-seciton">
+                <img alt="상단 메인 이미지" src="./img/main_visual.jpg">
+                <div class="section-item">
+                    <h1 class="banenr-text">이 text는 이미지가 바뀔 때 마다 달라집니다.</h1>
+                    <div class="search-box">
+                        <div class="search-tab">
+                            <ul class="serach-list">
+                                <li><span>국내 숙소</span></li>
+                                <li><span>해외 숙소</span></li>
+                            </ul>
+                        </div>
+                        <div class="searchArea">
+                            <form role="search" class="top-search">
+                                <div class="search">
+                                    <button type="button">
+                                        <div class="icon-box">
+                                            <img src="" alt="search">
+                                        </div>
+                                    </button>
+                                    <div class="search-input">
+                                        <input class="search-input-area" name="search_term" type="text"
+                                            placeholder="여행지나 숙소를 검색해보세요">
+                                    </div>
+                                </div>
+                                <div class="date-choice"> <button type="button">
+                                        <div class="icon-box">
+                                            <img src="" alt="calendar icon">
+                                        </div>
+                                        <span class="choose-date">날짜 선택</span>
+                                    </button>
+                                </div>
+                                <div class="people-count"> <button type="button">
+                                        <div class="icon-box">
+                                            <img src="" alt="people icon">
+                                        </div>
+                                        <span class="count">인원 선택</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="container-wrapper">
+                <section role="region" aria-label="놀라운 이벤트" class="event-section">
+                    <div class="event-box">
+                        <div class="text-box">
+                            <h2 class="section-title">놀라운 이벤트</h2>
+                            <span class="more-btn"><a href="#">더보기</a></span>
+                        </div>
+                        <div class="item-list">
+                            <div class="item"><a href="#"><img src="./img/event-item01.jpg" alt="Event-item-01"></a></div>
+                            <div class="item"><a href="#"><img src="./img/event-item02.jpg" alt="Event-item-02"></a></div>
+                            <div class="item"><a href="#"><img src="./img/event-item03.jpg" alt="Event-item-03"></a></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section role="region" aria-label="국내 인기 여행지" class="popular-section">
+                    <div class="popular-content">
+                        <div class="text-box">
+                            <h2 class="section-title">국내 인기 여행지</h2>
+                        </div>
+                        <div class="popular-item-list">
+                            <article class="popular-item">
+                                <a href="#">
+                                    <div class="popular-thumbnail">
+                                        <img src="./img/city-list-seoul.jpg" alt="서울">
+                                    </div>
+                                    <span class="city-name">서울</span>
+                                </a>
+                            </article>
+                            <article class="popular-item">
+                                <a href="#">
+                                    <div class="popular-thumbnail">
+                                        <img src="./img/city-list-dj.jpg" alt="대전">
+                                    </div>
+                                    <span class="city-name">대전</span>
+                                </a>
+                            </article>
+                            <article class="popular-item">
+                                <a href="#">
+                                    <div class="popular-thumbnail">
+                                        <img src="./img/city-list-dg.png" alt="대구">
+                                    </div>
+                                    <span class="city-name">대구</span>
+                                </a>
+                            </article>
+                            <article class="popular-item">
+                                <a href="#">
+                                    <div class="popular-thumbnail">
+                                        <img src="./img/city-list-bs02.png" alt="부산">
+                                    </div>
+                                    <span class="city-name">부산</span>
+                                </a>
+                            </article>
+                            <article class="popular-item">
+                                <a href="#">
+                                    <div class="popular-thumbnail">
+                                        <img src="./img/city-list-kj.jpg" alt="경주">
+                                    </div>
+                                    <span class="city-name">경주</span>
+                                </a>
+                            </article>
+                            <article class="popular-item">
+                                <a href="#">
+                                    <div class="popular-thumbnail">
+                                        <img src="./img/city-list-jeju.png" alt="제주도">
+                                    </div>
+                                    <span class="city-name">제주도</span>
+                                </a>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <section role="region" aria-label="로그인 이벤트 배너" class="event-banner">
+                    <div class="banner">
+                        <a href="#">
+                            <img src="#" alt="event-banner">
+                        </a>
+                    </div>
+                </section>
+
+                <section role="region" aria-label="지역별 인기 투어" class="region-tour">
+                    <div class="region-tours-box">
+                        <div class="tours-box-left">
+                            <div class="tours-img">
+                                <img src="#" alt="tours-img">
+                            </div>
+                            <div class="tours-text">
+                                <h2 class="tours-title">지역별 인기 투어 입장권 할인!</h2>
+                                <button class="more-btn">
+                                    <a href="#">
+                                        <span class="more-text">자세히보기</span>
+                                        <img src="#" alt="arrow-right">
+                                    </a>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="torus-box-right">
+                            <article role="region" class="tour-list-item" aria-label="인기 투어 리스트">
+                                <a href="#">
+                                    <div class="tour-item">
+                                        <img src="#" alt="tour-img">
+                                    </div>
+                                    <div class="tour-item-text">
+                                        <div class="tour-item-title">인기 투어 리스트1</div>
+                                        <div class="discount" style="display: none;"></div>
+                                        <span class="tour-item-price">99,999</span>
+                                        <span class="tour-item-sub">원</span>
+                                    </div>
+                                </a>
+                            </article>
+                            <article role="region" class="tour-list-item" aria-label="인기 투어 리스트">
+                                <a href="#">
+                                    <div class="tour-item">
+                                        <img src="#" alt="tour-img">
+                                    </div>
+                                    <div class="tour-item-text">
+                                        <div class="tour-item-title">인기 투어 리스트2</div>
+                                        <div class="discount" style="display: none;"></div>
+                                        <span class="tour-item-price">99,999</span>
+                                        <span class="tour-item-sub">원</span>
+                                    </div>
+                                </a>
+                            </article>
+                            <article role="region" class="tour-list-item" aria-label="인기 투어 리스트">
+                                <a href="#">
+                                    <div class="tour-item">
+                                        <img src="#" alt="tour-img">
+                                    </div>
+                                    <div class="tour-item-text">
+                                        <div class="tour-item-title">인기 투어 리스트3</div>
+                                        <div class="discount" style="display: none;"></div>
+                                        <span class="tour-item-price">99,999</span>
+                                        <span class="tour-item-sub">원</span>
+                                    </div>
+                                </a>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <section role="region" class="popular-gh-section" aria-label="인기 추천 게스트하우스">
+                    <div class="event-box">
+                        <div class="text-box">
+                            <h2 class="section-title">인기 추천 게스트하우스</h2>
+                            <span class="more-btn"><a href="#">더보기</a></span>
+                        </div>
+                        <div class="category-buttons mb-4">
+                            <button class="btn btn-outline-dark btn-sm active">전체</button>
+                            <button class="btn btn-outline-dark btn-sm">호텔·리조트</button>
+                            <button class="btn btn-outline-dark btn-sm">모텔</button>
+                            <button class="btn btn-outline-dark btn-sm">펜션·풀빌라</button>
+                            <button class="btn btn-outline-dark btn-sm">게스트하우스</button>
+                        </div>
+                        <article role="region" class="popular-gh-item" aria-label="인기 추천 게스트하우스">
+                            <a href="#">
+                                <div class="gh-item">
+                                    <img src="#" alt="gh-img">
+                                </div>
+                                <div class="gh-card-body">
+                                    <div class="tour-item-title">인기 투어 리스트3</div>
+                                    <div class="discount" style="display: none;"></div>
+                                    <span class="tour-item-price">99,999</span>
+                                    <span class="tour-item-sub">원</span>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                </section>
+            </div> </main>
+    </div>
+</body>
+</html>
